@@ -1,13 +1,24 @@
 h1 {
  padding-left: 1em;
+ font-weight:bold;
 }
 
 footer {
   padding-top: 2em;
 }
 h2 {
-   margin: 1em 0;
+   margin: 0.5em 0;
   }
- #logo{
+#logo{
  padding-left: 1em;
  	}
+#create{
+	display: flex;
+	height: 50px;
+	font-weight:bold;
+	justify-content: center;
+	align-items: center;
+	color:white;
+	background-color: blue;
+	border:2px;
+	}

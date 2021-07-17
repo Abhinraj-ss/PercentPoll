@@ -20,9 +20,15 @@ def login():
 
 @app.route("/logout")
 def logout():
-    oidc.logout()
     return redirect(url_for(".index"))
 
+@app.route("/create")
+def create():
+	return render_template("create.html")
+
+@app.route("/vote")
+def vote():
+	return render_template("vote.html")
 
 if __name__ == "__main__":
     app.run()

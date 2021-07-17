@@ -8,7 +8,11 @@ footer {
 }
 h2 {
    font-weight:bold;
-   margin: 0.5em 0;
+   margin: 1em 0;
+  }
+h3 {
+   font-weight:bold;
+   margin: 1em 0;
   }
 #logo{
  padding-left: 1em;
@@ -35,6 +39,7 @@ h2 {
 }
 h4{
 	margin: 1em;
+	padding-bottom: 2em;
 	}
 #topPad{
 	padding-top: 2em;

@@ -30,5 +30,9 @@ def create():
 def vote():
 	return render_template("vote.html")
 
+@app.route("/view")
+def veiw():
+	return render_template("view.html")
+	
 if __name__ == "__main__":
     app.run()

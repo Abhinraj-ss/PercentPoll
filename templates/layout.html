@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Percent Poll | {% block title %}{% endblock %}</title>
     <link rel="icon" href="static/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico" style= #0276FD>
+    <link rel="shortcut icon" type="image/x-icon" href="static/favic.ico" style= #0276FD>
   </head>
   <body id="body">
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow" id="header" >
 	<div id="logo" class="row"  >
      <a href="/"><img src="{{url_for('static', filename='logo.png')}}"/></a>
     </div>
-      <h1 class="my-0 mr-md-auto font-weight-normal">      Percent Poll</h1>
+      <h1 class="my-0 mr-md-auto font-weight-bold">      Percent Poll</h1>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="/" title="Home">Home</a>
         {% if not g.user %}

@@ -7,6 +7,7 @@ footer {
   padding-top: 2em;
 }
 h2 {
+   font-weight:bold;
    margin: 0.5em 0;
   }
 #logo{
@@ -32,4 +33,7 @@ h2 {
 #body{
 	background: #E3F2FD !important;
 }
+h4{
+	margin: 1em;
+	}
 

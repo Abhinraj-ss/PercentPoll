@@ -5,28 +5,32 @@
 {% block body %}
   <h2 class="text-center">Log In / Register</h2>
   <div class="row">
-		<div class="col-sm-8 offset-sm-2">
+		<div class="col-sm-6 offset-sm-3">
 		<div class="shadow-lg mb-5 rounded">
-			<div class="jumbotron">
-			  <form>
-				  <div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-					<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			
+			   <form action="/" method="post">
+				  <div class="imgcontainer">
+					<img src="static/img_avatar2.png" alt="Avatar" class="avatar">
 				  </div>
-				  <div class="form-group">
-					<label for="Password">Password</label>
-					<input type="password" class="form-control" id="ePassword" placeholder="Password">
+
+				  <div class="container">
+					<label for="uname"><b>Username</b></label>
+					<input type="text" placeholder="Enter Username" name="uname" required>
+
+					<label for="psw"><b>Password</b></label>
+					<input type="password" placeholder="Enter Password" name="psw" required>
+
+					<button type="submit">Login</button>
+					<label>
+					  <input type="checkbox" checked="checked" name="remember"> Remember me
+					</label>
 				  </div>
-				  <div class="row" style ="padding-left:2em">
-					  <div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="loggedIn">
-						<label class="form-check-label" for="loggedIn">Remember me</label>
-					  </div>
-					  <a href="/" style ="padding-left:25em">New registration</a>
+
+				  <div class="container" >
+					<a type="button" class="cancelbtn" href="/">Cancel</a>
+					<span class="psw"><a href="#">Forgot password?</a></span>
 				  </div>
-				  <a type="submit" class="btn btn-primary" href="/">Submit</a>
-				</form>
+				</form> 
 			</div>
 		</div>
 	</div>

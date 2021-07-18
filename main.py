@@ -24,11 +24,17 @@ def logout():
 
 @app.route("/create")
 def create():
+	
 	return render_template("create.html")
 
-@app.route("/vote")
+@app.route("/vote" , methods=["GET","POST"])
 def vote():
-	return render_template("vote.html")
+	title=request.form['title']
+	pollOption=request.form.getlist('pollOption[]')
+	print(f"{title} {pollOption}")
+	return render_template("vote.html",
+							title=title,
+							pollOption=pollOption)
 
 @app.route("/view")
 def veiw():

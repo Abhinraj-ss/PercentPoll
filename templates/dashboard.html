@@ -8,7 +8,7 @@
 		<div class="col-sm-6 offset-sm-3">
 		<div class="shadow-lg mb-5 rounded">
 			
-			   <form action="/" method="post">
+			   <form action="{{url_for('index')}}" method="post">
 				  <div class="imgcontainer">
 					<img src="static/img_avatar2.png" alt="Avatar" class="avatar">
 				  </div>
@@ -28,7 +28,7 @@
 
 				  <div class="container" >
 					<a type="button" class="cancelbtn" href="/">Cancel</a>
-					<span class="psw"><a href="/register">New User?</a></span>
+					<span class="psw"><a href="{{url_for('register')}}">New User?</a></span>
 				  </div>
 				</form> 
 			</div>

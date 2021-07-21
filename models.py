@@ -30,7 +30,7 @@ class Poll( db.Model):
  
 class Pollings(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
-    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"))
+    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"),unique=True)
     option1 = db.Column(db.Integer)
     option2 = db.Column(db.Integer)
     option3 = db.Column(db.Integer)

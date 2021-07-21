@@ -6,9 +6,10 @@ from .models import Poll, Pollings
 
 main = Blueprint('main', __name__)
  
-@main.route("/" , methods=["GET","POST"])
+@main.route("/" )
 @login_required
 def index():
+    
     return render_template("index.html",name=current_user.username.title())
 
 
@@ -37,7 +38,7 @@ def create_post():
     
     return redirect(url_for('main.vote'))
 
-@main.route("/vote" )
+@main.route("/vote" , methods=["GET","POST"])
 def vote():
     poll = Poll.query.filter_by(hostId=current_user.id).first()
     pollOption=[]
@@ -51,15 +52,39 @@ def vote():
     pollOption.append(poll.option8)
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
-    return render_template("vote.html",title=poll.title,pollOption=pollOption)
+    if request.method == 'GET':
     
-
+        return render_template("vote.html",pollId=int(poll.id),title=poll.title,pollOption=pollOption)
+    if request.method == 'POST':
+        select = request.form['selected']
+        index=pollOption.index(select)
+        option=f"option{index+1}"
+        polling = Pollings.query.filter_by( pollId = poll.id).first()
+        if option==option1:
+            polling.option1+=1
+        elif option==option2:
+            polling.option2+=1
+        elif option==option3:
+            polling.option3+=1
+        elif option==option4:
+            polling.option4+=1
+        elif option==option5:
+            polling.option5+=1
+        elif option==option6:
+            polling.option6+=1
+        elif option==option7:
+            polling.option7+=1
+        elif option==option8:
+            polling.option8+=1
+        elif option==option9:
+            polling.option9+=1
+        elif option==option10:
+            polling.option10+=1
+        db.session.commit()   
+        
+        return redirect(url_for('main.index'))
    
-@main.route("/vote" , methods=['POST'])
-def vote_post():
-    select = request.form['selected']
-    print(select)
-    return redirect(url_for('main.index'))
+
     
     
     

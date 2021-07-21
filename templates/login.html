@@ -1,18 +1,18 @@
 {% extends "layout.html" %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block body %}
-  <h2 class="text-center">Register</h2>
+  <h2 class="text-center">Log In </h2>
   <div class="row">
 		<div class="col-sm-6 offset-sm-3">
 		<div class="shadow-lg mb-5 rounded">
 			
-			   <form action="/register" method="post">
-			       {% with messages = get_flashed_messages() %}
+			   <form action="/login" method="post">
+			        {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         <div class="notification is-danger">
-                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                            {{ messages[0] }}
                         </div>
                     {% endif %}
                     {% endwith %}
@@ -21,18 +21,22 @@
 				  </div>
 
 				  <div class="container">
-					<label for="uname"><b>Username</b></label>
+					<label for="username"><b>Username</b></label>
 					<input type="text" placeholder="Enter Username" name="username" required>
 
-					<label for="psw"><b>Password</b></label>
+					<label for="password"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="password" required>
 
-					<button type="submit">Register </button>
+					<button type="submit">Login</button>
 					<label>
 					  <input type="checkbox" checked="checked" name="remember"> Remember me
 					</label>
 				  </div>
 
+				  <div class="container" >
+					<a type="button" class="cancelbtn" href="/">Cancel</a>
+					<span class="psw"><a href="{{url_for('auth.register')}}">New User?</a></span>
+				  </div>
 				</form> 
 			</div>
 		</div>

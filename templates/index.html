@@ -9,12 +9,12 @@
     	<h2 class="text-center">Welcome to Percent Poll</h2>
       <div class="shadow-lg mb-5 rounded">
       <div class="jumbotron">
-       <h5>Hi, you are here?.
+       <h5>Hi {{name}},
         Here you can easily host a poll and get your vote for the poll by sharing the link generated.
         Excited!!? Click on the CREATE A POLL button and start creating your poll.</h5>
       </div>
       </div>
-      <a class="btn" id= "create"  href="{{url_for('create')}}">CREATE A POLL</a>
+      <a class="btn" id= "create"  href="{{url_for('main.create')}}">CREATE A POLL</a>
       <hr/>
       <h3 class="text-center">Current Polls</h3>
       <div class="card w-100">

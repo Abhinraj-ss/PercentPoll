@@ -1,55 +1,37 @@
 
 from flask import Flask, request, render_template, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
-import psycopg2
+db = SQLAlchemy()
 
 def create_app():
 
     app = Flask("percentpoll")
     
+    app.config['SECRET_KEY'] = '\x14\x8b\xe8m\x88(\xc4!\xfe\x05!\xb9'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    db.init_app(app)
+    
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
 
-    @app.route("/" , methods=["GET","POST"])
-    def index():
-        return render_template("index.html")
+    from .models import User
 
-    @app.route("/dashboard" , methods=["GET","POST"])
-    def dashboard():
-        return render_template("dashboard.html")
+    @login_manager.user_loader
+    def load_user(user_id):
+        # since the user_id is just the primary key of our user table, use it in the query for the user
+        return User.query.get(int(user_id))
 
+    # blueprint for auth routes in our app
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
-    @app.route("/login")
-    def login():
-        
-        return redirect(url_for(".dashboard"))
-       
-        
-    @app.route("/logout")
-    def logout():
-        return redirect(url_for(".index"))
-
-
-    @app.route("/register", methods=["GET","POST"])
-    def register():
-        
-        return render_template("register.html")
-
-    @app.route("/create")
-    def create():
-	    
-	    return render_template("create.html")
-
-    @app.route("/vote" , methods=["GET","POST"])
-    def vote():
-	    title=request.form['title']
-	    pollOption=request.form.getlist('pollOption[]')
-	    closing=request.form['closing']
-	    print(f"{title} {pollOption} {type(closing)}")
-	    return render_template("vote.html",
-							    title=title,
-							    pollOption=pollOption)
-
-    @app.route("/view")
-    def veiw():
-	    return render_template("view.html")
-	    
+    # blueprint for non-auth parts of app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    
     return app

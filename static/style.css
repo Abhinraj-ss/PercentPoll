@@ -47,9 +47,11 @@ h4{
 	padding-bottom: 2em;
 	}
 #topPad{
-	padding-top: 2em;
+	padding-top: 1em;
 	}
-	
+#bottomPad{
+    padding-bottom:2em;
+    }	
 
 
 /* Full-width inputs */
@@ -120,3 +122,31 @@ span.psw {
     width: 100%;
   }
 } 
+
+.blink-bg{
+    display flex;
+	color: #fff;
+	padding: 10px;
+	display: inline-block;
+	border-radius: 5px;
+	animation: blinkingBackground 2s infinite;
+}
+@keyframes blinkingBackground{
+	0%		{ background-color: #10c018;}
+	25%		{ background-color: #1056c0;}
+	50%		{ background-color: #ef0a1a;}
+	75%		{ background-color: #254878;}
+	100%	        { background-color: #04a1d5;}
+}
+
+#alert{
+    display: flex;
+	height: 50px;
+	font-weight:bold;
+	margin: 2em;
+	justify-content: center;
+	align-items: center;
+	color:white;
+	background-color: #ff0f0f;
+	border:2px;
+	}

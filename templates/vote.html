@@ -14,7 +14,9 @@
 			  <select class="custom-select custom-select-lg mb-3">
 				  <option selected>Select</option>
 				  {% for option in pollOption %}
-				  <option value="1">{{option}}</option>
+				    {% if 'NONE' not in option %}
+				        <option value="1">{{option}}</option>
+				    {% endif %}
 				  {% endfor %}
 			  </select>
 		     </div>

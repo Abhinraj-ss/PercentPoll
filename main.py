@@ -23,14 +23,13 @@ def create_post():
     pollOption=request.form.getlist('pollOption[]')
     closing=request.form['closing']
     
-    new_poll = Poll(pollId=current_user.id, title=title, option1=pollOption[0],date=closing)
-    
-  
-    try:
-        db.session.add(new_poll)
-        db.session.commit()
-    except:
-        return 'Unable to add the user to database.'
+    for i in range(len(pollOption),10):
+        pollOption.append('NONE')
+            
+    new_poll = Poll(pollId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing)
+
+    db.session.add(new_poll)
+    db.session.commit()
         
     return redirect(url_for('main.vote'))
 
@@ -39,6 +38,15 @@ def vote():
     poll = Poll.query.filter_by(pollId=current_user.id).first()
     pollOption=[]
     pollOption.append(poll.option1)
+    pollOption.append(poll.option2)
+    pollOption.append(poll.option3)
+    pollOption.append(poll.option4)
+    pollOption.append(poll.option5)
+    pollOption.append(poll.option6)
+    pollOption.append(poll.option7)
+    pollOption.append(poll.option8)
+    pollOption.append(poll.option9)
+    pollOption.append(poll.option10)
     return render_template("vote.html",title=poll.title,pollOption=pollOption)
     
     

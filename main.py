@@ -31,6 +31,7 @@ def create_post():
     db.session.add(new_poll)
     db.session.commit()
         
+    
     return redirect(url_for('main.vote'))
 
 @main.route("/vote" )
@@ -49,13 +50,16 @@ def vote():
     pollOption.append(poll.option10)
     return render_template("vote.html",title=poll.title,pollOption=pollOption)
     
-    
-@main.route("/vote" , methods=['POST'])
-def vote_post():
-    
-    return redirect(url_for('main.index'))
-
 @main.route("/view")
 def view():
+
     return render_template("view.html")
 	    
+   
+@main.route("/vote" , methods=['POST'])
+def vote_post():
+    select = request.form['selected']
+    print(select)
+    return redirect(url_for('main.index'))
+
+

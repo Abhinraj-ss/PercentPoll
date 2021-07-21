@@ -4,6 +4,7 @@
 
 {% block body %}
   <h2 class="text-center">VOTE HERE</h2>
+  <form action="/vote" method="post">
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
     	<div class="shadow-lg mb-5 rounded">
@@ -11,19 +12,20 @@
     	<div class="text-center">
     		<h4>{{title}}</h4>
     		<hr/>
-			  <select class="custom-select custom-select-lg mb-3">
-				  <option selected>Select</option>
-				  {% for option in pollOption %}
-				    {% if 'NONE' not in option %}
-				        <option value="1">{{option}}</option>
-				    {% endif %}
-				  {% endfor %}
-			  </select>
+			      <select class="custom-select custom-select-lg mb-3" name="selected" >
+				      <option selected>Select</option>
+				      {% for option in pollOption %}
+				        {% if 'NONE' not in option %}
+				            <option>{{option}}</option>
+				        {% endif %}
+				      {% endfor %}
+			      </select>
 		     </div>
          </div>
-         </div>
-      <a class="btn btn-primary btn-lg" id= "create"  href="/">DONE</a>
-      <a class="btn btn-primary btn-lg" id= "create"  href="/">GO HOME</a>
+      </div>
+      <button class="btn btn-primary btn-lg center" id= "create" type="submit">DONE</button>
+    <a class="btn btn-primary btn-lg" id= "create"  href="/">GO HOME</a>
     </div>
   </div>
+  </form>
 {% endblock %}

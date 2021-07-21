@@ -9,13 +9,15 @@
 		<div class="shadow-lg mb-5 rounded">
 			
 			   <form action="/login" method="post">
+			    <div id="topPad">
 			        {% with messages = get_flashed_messages() %}
                     {% if messages %}
-                        <div class="notification is-danger">
+                        <div class="notification is-danger" id ="alert">
                             {{ messages[0] }}
                         </div>
                     {% endif %}
                     {% endwith %}
+                  </div>
 				  <div class="imgcontainer">
 					<img src="static/img_avatar2.png" alt="Avatar" class="avatar">
 				  </div>

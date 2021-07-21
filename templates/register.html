@@ -6,16 +6,18 @@
   <h2 class="text-center">Register</h2>
   <div class="row">
 		<div class="col-sm-6 offset-sm-3">
-		<div class="shadow-lg mb-5 rounded">
+		<div class="shadow-lg mb-5 rounded" id="bottomPad">
 			
-			   <form action="/register" method="post">
+			   <form action="/register" method="post" >
+			    <div id="topPad">
 			       {% with messages = get_flashed_messages() %}
                     {% if messages %}
-                        <div class="notification is-danger">
-                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                        <div class="notification is-danger" id ="alert">
+                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}" style="color:#FFFFFF; padding-left:0.5em;"> login page</a>.
                         </div>
                     {% endif %}
                     {% endwith %}
+                  </div>
 				  <div class="imgcontainer">
 					<img src="static/img_avatar2.png" alt="Avatar" class="avatar">
 				  </div>
@@ -27,10 +29,8 @@
 					<label for="psw"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="password" required>
 
-					<button type="submit">Register </button>
-					<label>
-					  <input type="checkbox" checked="checked" name="remember"> Remember me
-					</label>
+					<button type="submit" >Register </button>
+					
 				  </div>
 
 				</form> 

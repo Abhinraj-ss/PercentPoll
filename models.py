@@ -12,7 +12,7 @@ class User(UserMixin, db.Model):
     
 class Poll( db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
-    pollId=db.Column(db.Integer, db.ForeignKey("user.id"))
+    hostId=db.Column(db.Integer, db.ForeignKey("user.id"))
     title=db.Column(db.String(30))
     option1 = db.Column(db.String(20))
     option2 = db.Column(db.String(20))
@@ -25,4 +25,19 @@ class Poll( db.Model):
     option9 = db.Column(db.String(20))
     option10 = db.Column(db.String(20))
     date=db.Column(db.String(20))
+    pollings=db.relationship("Pollings",backref='poll')
    
+ 
+class Pollings(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
+    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"))
+    option1 = db.Column(db.Integer)
+    option2 = db.Column(db.Integer)
+    option3 = db.Column(db.Integer)
+    option4 = db.Column(db.Integer)
+    option5 = db.Column(db.Integer)
+    option6 = db.Column(db.Integer)
+    option7 = db.Column(db.Integer)
+    option8 = db.Column(db.Integer)
+    option9 = db.Column(db.Integer)
+    option10 = db.Column(db.Integer)

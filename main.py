@@ -32,14 +32,14 @@ def create_post():
     except:
         return 'Unable to add the user to database.'
         
-    return render_template("vote.html",
-						    title=title,
-						    pollOption=pollOption)
+    return redirect(url_for('main.vote'))
 
 @main.route("/vote" )
 def vote():
-    
-    return render_template("vote.html")
+    poll = Poll.query.filter_by(pollId=current_user.id).first()
+    pollOption=[]
+    pollOption.append(poll.option1)
+    return render_template("vote.html",title=poll.title,pollOption=pollOption)
     
     
 @main.route("/vote" , methods=['POST'])

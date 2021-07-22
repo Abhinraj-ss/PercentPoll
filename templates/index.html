@@ -17,7 +17,7 @@
       <a class="blink-bg" id= "create"  href="{{url_for('main.create')}}">CREATE POLL</a>
       <hr/>
       <h3 class="text-center">Current Polls</h3>
-      {% for poll in polls %}
+      {% for poll, percent in zipped_data %}
       <div class="card w-100" style="margin-top:2em;">
 		  <div class="card-body">
 		  
@@ -26,9 +26,9 @@
 			
 			
 			
-			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+			<p class="card-text">{{poll.option1}}</p>
 			<div class="progress">
-			  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 50%">75%</div>
+			  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%</div>
 			</div>
 			
 			

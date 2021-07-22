@@ -11,9 +11,12 @@ main = Blueprint('main', __name__)
 @login_required
 def index():
     polls = Poll.query.filter_by( hostId=current_user.id).all()
-    
-    
-    return render_template("index.html",name=current_user.username.title(),polls=polls)
+    percents=[]
+    for poll in polls:
+        percents.append(Percentpoll.query.filter_by( pollId=poll.id).first())
+   
+    zipped=zip(polls,percents)
+    return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
 
 
 @main.route("/create")

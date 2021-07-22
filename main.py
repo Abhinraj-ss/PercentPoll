@@ -57,29 +57,46 @@ def vote():
         return render_template("vote.html",pollId=int(poll.id),title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
+        print(select)
+        
         index=pollOption.index(select)
         option=f"option{index+1}"
         polling = Pollings.query.filter_by( pollId = poll.id).first()
-        if option==option1:
+        if option=="option1":
             polling.option1+=1
-        elif option==option2:
+        elif option=="option2":
             polling.option2+=1
-        elif option==option3:
+        elif option=="option3":
             polling.option3+=1
-        elif option==option4:
+        elif option=="option4":
             polling.option4+=1
-        elif option==option5:
+        elif option=="option5":
             polling.option5+=1
-        elif option==option6:
+        elif option=="option6":
             polling.option6+=1
-        elif option==option7:
+        elif option=="option7":
             polling.option7+=1
-        elif option==option8:
+        elif option=="option8":
             polling.option8+=1
-        elif option==option9:
+        elif option=="option9":
             polling.option9+=1
-        elif option==option10:
+        elif option=="option10":
             polling.option10+=1
+            
+            
+            
+        print(polling.option1)
+        print(polling.option2)
+        print(polling.option3)
+        print(polling.option4)
+        print(polling.option5)
+        print(polling.option6)
+        print(polling.option7)
+        print(polling.option8)
+        print(polling.option9)
+        print(polling.option10)
+            
+            
         db.session.commit()   
         
         return redirect(url_for('main.index'))

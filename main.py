@@ -19,6 +19,8 @@ def index():
     return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
 
 
+
+
 @main.route("/create")
 def create():
     today = date.today()
@@ -51,9 +53,10 @@ def create_post():
     db.session.add(new_poll)
     db.session.add(new_pollings)
     db.session.commit()
-        
-    
     return redirect(url_for('main.vote',userId=current_user.id,pollId=new_poll.id))
+
+
+
 
 @main.route("/vote/<userId>/<pollId>" , methods=["GET","POST"])
 def vote(userId,pollId):
@@ -70,17 +73,13 @@ def vote(userId,pollId):
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
     if request.method == 'GET':
-    
         return render_template("vote.html",pollId=int(poll.id),title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
-        print(select)
-        
         index=pollOption.index(select)
         option=f"option{index+1}"
         polling = Pollings.query.filter_by( pollId = poll.id).first()
         percentpoll = Percentpoll.query.filter_by( pollId = poll.id).first()
-        
         sum=polling.option1+polling.option2+polling.option3+polling.option4+polling.option5+polling.option6+polling.option7+polling.option8+polling.option9+polling.option10+1
         
         if option=="option1":
@@ -148,7 +147,6 @@ def vote(userId,pollId):
             
             
         db.session.commit()   
-        
         return redirect(url_for('main.index'))
    
 
@@ -157,8 +155,9 @@ def vote(userId,pollId):
     
 @main.route("/view")
 def view():
-
-    return render_template("view.html")
+    poll = Poll.query.filter_by( hostId=current_user.id).first()
+    percent=Percentpoll.query.filter_by( pollId=poll.id).first()
+    return render_template("view.html",poll=poll,percent=percent)
 	    
 
 

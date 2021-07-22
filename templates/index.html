@@ -18,23 +18,71 @@
       <hr/>
       <h3 class="text-center">Current Polls</h3>
       {% for poll, percent in zipped_data %}
-      <div class="card w-100" style="margin-top:2em;">
-		  <div class="card-body">
-		  
-			<h5 class="card-title">{{poll.title}}</h5>
-			
-			
-			
-			
-			<p class="card-text">{{poll.option1}}</p>
-			<div class="progress">
-			  <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%</div>
-			</div>
-			
-			
-		   
-		  </div>
-		</div>
+        <hr/>
+          <div class="card w-100" style="margin-top:2em;">
+		      <div class="card-body">
+		      
+			    <h5 class="card-title">{{poll.title}}</h5>
+			    <hr/>
+			    <p class="card-text">{{poll.option1}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%</div>
+			    </div>
+			    <p class="card-text">{{poll.option2}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option2}}%">{{percent.option2}}%</div>
+			    </div>
+			    {% if poll.option3 != 'NONE' %}
+			    <p class="card-text">{{poll.option3}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option3}}%">{{percent.option3}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option4 != 'NONE' %}
+			    <p class="card-text">{{poll.option4}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option4}}%">{{percent.option4}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option5 != 'NONE' %}
+			    <p class="card-text">{{poll.option5}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option5}}%">{{percent.option5}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option6 != 'NONE' %}
+			    <p class="card-text">{{poll.option6}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option6}}%">{{percent.option6}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option7 != 'NONE' %}
+			    <p class="card-text">{{poll.option7}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option7}}%">{{percent.option7}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option8 != 'NONE' %}
+			    <p class="card-text">{{poll.option8}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option8}}%">{{percent.option8}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option9 != 'NONE' %}
+			    <p class="card-text">{{poll.option9}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option9}}%">{{percent.option9}}%</div>
+			    </div>
+			    {% endif %}
+			    {% if poll.option10 != 'NONE' %}
+			    <p class="card-text">{{poll.option10}}</p>
+			    <div class="progress">
+			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option10}}%">{{percent.option10}}%</div>
+			    </div>{% endif %}
+		       
+		      </div>
+		    </div>
+		
         {% endfor %} 
       	<hr/>
       	

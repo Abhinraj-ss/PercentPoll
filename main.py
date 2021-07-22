@@ -2,13 +2,16 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from flask import Blueprint
 from . import db
-from .models import Poll, Pollings
+from .models import Poll, Pollings, Percentpoll
 
 main = Blueprint('main', __name__)
  
 @main.route("/" )
 @login_required
 def index():
+    polls = Poll.query.filter_by( hostId=current_user.id).all()
+    #for poll in polls:
+        
     
     return render_template("index.html",name=current_user.username.title())
 
@@ -30,9 +33,11 @@ def create_post():
     new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing)
     
     new_pollings=Pollings(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
+    
+    new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
+    db.session.add(new_percentpoll)
     db.session.add(new_poll)
     db.session.add(new_pollings)
-    print(new_pollings)
     db.session.commit()
         
     
@@ -62,39 +67,72 @@ def vote():
         index=pollOption.index(select)
         option=f"option{index+1}"
         polling = Pollings.query.filter_by( pollId = poll.id).first()
+        percentpoll = Percentpoll.query.filter_by( pollId = poll.id).first()
+        
+        sum=polling.option1+polling.option2+polling.option3+polling.option4+polling.option5+polling.option6+polling.option7+polling.option8+polling.option9+polling.option10+1
+        
         if option=="option1":
             polling.option1+=1
+            
         elif option=="option2":
             polling.option2+=1
+            
         elif option=="option3":
             polling.option3+=1
+            
         elif option=="option4":
             polling.option4+=1
+            
         elif option=="option5":
             polling.option5+=1
+            
         elif option=="option6":
             polling.option6+=1
+            
         elif option=="option7":
             polling.option7+=1
+            
         elif option=="option8":
             polling.option8+=1
+            
         elif option=="option9":
             polling.option9+=1
+            
         elif option=="option10":
             polling.option10+=1
             
-            
-            
+        
+        percentpoll.option1=(polling.option1/sum)*100
+        percentpoll.option2=(polling.option2/sum)*100   
+        percentpoll.option3=(polling.option3/sum)*100    
+        percentpoll.option4=(polling.option4/sum)*100
+        percentpoll.option5=(polling.option5/sum)*100
+        percentpoll.option6=(polling.option6/sum)*100
+        percentpoll.option7=(polling.option7/sum)*100
+        percentpoll.option8=(polling.option8/sum)*100
+        percentpoll.option9=(polling.option9/sum)*100
+        percentpoll.option10=(polling.option10/sum)*100
+           
         print(polling.option1)
+        print(percentpoll.option1)
         print(polling.option2)
+        print(percentpoll.option2)
         print(polling.option3)
+        print(percentpoll.option3)
         print(polling.option4)
+        print(percentpoll.option4)
         print(polling.option5)
+        print(percentpoll.option5)
         print(polling.option6)
+        print(percentpoll.option6)
         print(polling.option7)
+        print(percentpoll.option7)
         print(polling.option8)
+        print(percentpoll.option8)
         print(polling.option9)
+        print(percentpoll.option9)
         print(polling.option10)
+        print(percentpoll.option10)
             
             
         db.session.commit()   

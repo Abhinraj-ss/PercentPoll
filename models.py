@@ -41,3 +41,20 @@ class Pollings(db.Model):
     option8 = db.Column(db.Integer)
     option9 = db.Column(db.Integer)
     option10 = db.Column(db.Integer)
+    percentpoll=db.relationship("Percentpoll",backref='pollCount')
+    
+    
+    
+class Percentpoll(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
+    pollId=db.Column(db.Integer, db.ForeignKey("pollings.pollId"),unique=True)
+    option1 = db.Column(db.Integer)
+    option2 = db.Column(db.Integer)
+    option3 = db.Column(db.Integer)
+    option4 = db.Column(db.Integer)
+    option5 = db.Column(db.Integer)
+    option6 = db.Column(db.Integer)
+    option7 = db.Column(db.Integer)
+    option8 = db.Column(db.Integer)
+    option9 = db.Column(db.Integer)
+    option10 = db.Column(db.Integer)

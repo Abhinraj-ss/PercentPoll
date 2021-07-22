@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from flask import Blueprint
+from datetime import date
 from . import db
 from .models import Poll, Pollings, Percentpoll
 
@@ -10,16 +11,17 @@ main = Blueprint('main', __name__)
 @login_required
 def index():
     polls = Poll.query.filter_by( hostId=current_user.id).all()
-    #for poll in polls:
-        
     
-    return render_template("index.html",name=current_user.username.title())
+    
+    return render_template("index.html",name=current_user.username.title(),polls=polls)
 
 
 @main.route("/create")
 def create():
-    
-    return render_template("create.html")
+    today = date.today()
+    date_today = today.strftime("%d/%m/%Y")
+    print(date_today)
+    return render_template("create.html",date=date_today)
     
 @main.route("/create", methods=['POST'])
 def create_post():

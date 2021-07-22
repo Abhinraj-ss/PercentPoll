@@ -26,11 +26,11 @@ class Poll( db.Model):
     option10 = db.Column(db.String(20))
     date=db.Column(db.String(20))
     pollings=db.relationship("Pollings",backref='poll')
-   
+    pollings=db.relationship("Percentpoll",backref='poll')
  
 class Pollings(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
-    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"),unique=True)
+    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"))
     option1 = db.Column(db.Integer)
     option2 = db.Column(db.Integer)
     option3 = db.Column(db.Integer)
@@ -41,13 +41,12 @@ class Pollings(db.Model):
     option8 = db.Column(db.Integer)
     option9 = db.Column(db.Integer)
     option10 = db.Column(db.Integer)
-    percentpoll=db.relationship("Percentpoll",backref='pollCount')
     
     
     
 class Percentpoll(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True,unique=True)
-    pollId=db.Column(db.Integer, db.ForeignKey("pollings.pollId"),unique=True)
+    pollId=db.Column(db.Integer, db.ForeignKey("poll.id"))
     option1 = db.Column(db.Integer)
     option2 = db.Column(db.Integer)
     option3 = db.Column(db.Integer)

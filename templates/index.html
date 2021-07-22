@@ -17,9 +17,11 @@
       <a class="blink-bg" id= "create"  href="{{url_for('main.create')}}">CREATE POLL</a>
       <hr/>
       <h3 class="text-center">Current Polls</h3>
-      <div class="card w-100">
+      {% for poll in polls %}
+      <div class="card w-100" style="margin-top:2em;">
 		  <div class="card-body">
-			<h5 class="card-title">Card title=tile</h5>
+		  
+			<h5 class="card-title">{{poll.title}}</h5>
 			
 			
 			
@@ -30,10 +32,10 @@
 			</div>
 			
 			
-			
+		   
 		  </div>
 		</div>
-      
+        {% endfor %} 
       	<hr/>
       	
        <h3 class="text-center">Recent Polls</h3>

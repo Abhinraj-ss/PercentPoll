@@ -28,21 +28,15 @@
      	</div>	  
      	</div>
      	<label for="closing">Closes On:</label>
-		<input type="date" id="card" class="form-control"  name="closing" required> 
-     	<div class="form-group" style="display:flex">
-				<input type="submit" class="btn btn-primary btn-lg btn-block" id= "create"  value="CREATE">
-		</div>
-		
-		
-		
-      	  <div class="input-group">
-              <input type="text" class="form-control input-monospace input-sm " id="link" value="http://127.0.0.1:5000/vote/{{hostId}}/{{pollId}}" aria-label="git@github.com:Abhinraj-ss/PercentPoll.git" readonly>
-              
-        </div> 
-      </form>
-      <div class="col">
-          <button onclick="copyLink()">Copy link</button>
+		<input type="date" id="card" class="form-control"  name="closing" required>
+          <label id= "topPad">Percent Poll link:</label>
+          <input type="text" class="form-control input-monospace input-sm " id="link" value="http://127.0.0.1:5000/vote/{{hostId}}/{{pollId}}"  readonly>
+      
+        <div class="col" style="display:flex">
+          <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()"id= "create" value="Create & Copy link">
       </div>
+      </form>
+      
     </div>
   </div>
 {% endblock %}

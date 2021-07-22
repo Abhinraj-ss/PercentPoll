@@ -73,7 +73,7 @@ def vote(userId,pollId):
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
     if request.method == 'GET':
-        return render_template("vote.html",pollId=int(poll.id),title=poll.title,pollOption=pollOption)
+        return render_template("vote.html",userId=userId,pollId=int(poll.id),title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
         index=pollOption.index(select)

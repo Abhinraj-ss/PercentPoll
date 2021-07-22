@@ -59,6 +59,7 @@ def create_post():
 
 
 @main.route("/vote/<userId>/<pollId>" , methods=["GET","POST"])
+@login_required
 def vote(userId,pollId):
     poll = Poll.query.filter_by(hostId=userId).first()
     pollOption=[]

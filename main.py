@@ -24,7 +24,14 @@ def create():
     today = date.today()
     date_today = today.strftime("%d/%m/%Y")
     print(date_today)
-    return render_template("create.html",date=date_today)
+    
+    polls=Poll.query.filter_by(hostId=current_user.id).all()
+    
+    for poll in polls:
+        print(poll.id)
+    
+    lastPoll = Poll.query.order_by(Poll.id.desc()).first()
+    return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1)
     
 @main.route("/create", methods=['POST'])
 def create_post():
@@ -46,11 +53,11 @@ def create_post():
     db.session.commit()
         
     
-    return redirect(url_for('main.vote'))
+    return redirect(url_for('main.vote',userId=current_user.id,pollId=new_poll.id))
 
-@main.route("/vote" , methods=["GET","POST"])
-def vote():
-    poll = Poll.query.filter_by(hostId=current_user.id).first()
+@main.route("/vote/<userId>/<pollId>" , methods=["GET","POST"])
+def vote(userId,pollId):
+    poll = Poll.query.filter_by(hostId=userId).first()
     pollOption=[]
     pollOption.append(poll.option1)
     pollOption.append(poll.option2)

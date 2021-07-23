@@ -3,13 +3,13 @@ from flask_login import login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from . import db
-
 auth = Blueprint('auth', __name__)
 
 @auth.route("/login")
 def login():
-    
-    return render_template('login.html')
+    next=request.args.get('next', '')
+    print(request.args.get('next', ''))
+    return render_template('login.html',next=next)
    
     
 @auth.route('/logout')
@@ -62,7 +62,12 @@ def login_post():
     if not user or not check_password_hash(user.password, password):
         flash('Please check your login details and try again.')
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
-
+        
+    next=request.form.get('next')
+    print(type(next))
+    if next != "/":
+        print("none alla")
+        return redirect(request.form.get('next'))
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
     return redirect(url_for('main.index'))

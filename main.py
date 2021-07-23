@@ -13,47 +13,49 @@ def index():
     polls = Poll.query.filter_by( hostId=current_user.id).all()
     percents=[]
     for poll in polls:
-        percents.append(Percentpoll.query.filter_by( pollId=poll.id).first())
-   
+        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
+    print(percents[0])
+    print(percents[1])
     zipped=zip(polls,percents)
     return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
 
 
 
 
-@main.route("/create")
+@main.route("/create", methods=["GET","POST"])
 def create():
-    today = date.today()
-    date_today = today.strftime("%d/%m/%Y")
-    print(date_today)
+    if request.method == 'GET':
     
-    polls=Poll.query.filter_by(hostId=current_user.id).all()
+        today = date.today()
+        date_today = today.strftime("%d/%m/%Y")
+        print(date_today)
+
+        polls=Poll.query.filter_by(hostId=current_user.id).all()
+        lastPoll = Poll.query.order_by(Poll.id.desc()).first()
+        if polls:
+            return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1)
+        return render_template("create.html",hostId=current_user.id,pollId=1)
     
-    for poll in polls:
-        print(poll.id)
+    if request.method == 'POST':
     
-    lastPoll = Poll.query.order_by(Poll.id.desc()).first()
-    return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1)
-    
-@main.route("/create", methods=['POST'])
-def create_post():
-    title=request.form['title']
-    pollOption=request.form.getlist('pollOption[]')
-    closing=request.form['closing']
-    
-    for i in range(len(pollOption),10):
-        pollOption.append('NONE')
-            
-    new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing)
-    
-    new_pollings=Pollings(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
-    
-    new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
-    db.session.add(new_percentpoll)
-    db.session.add(new_poll)
-    db.session.add(new_pollings)
-    db.session.commit()
-    return redirect(url_for('main.vote',userId=current_user.id,pollId=new_poll.id))
+        title=request.form['title']
+        pollOption=request.form.getlist('pollOption[]')
+        closing=request.form['closing']
+        
+        for i in range(len(pollOption),10):
+            pollOption.append('NONE')
+                
+        new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing)
+        
+        new_pollings=Pollings(pollId=new_poll.id,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
+        
+        new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
+        db.session.add(new_percentpoll)
+        db.session.add(new_poll)
+        db.session.add(new_pollings)
+        db.session.commit()
+        return redirect(url_for('main.vote',userId=current_user.id,pollId=new_poll.id))
+        #return redirect(url_for('main.index')
 
 
 
@@ -61,7 +63,7 @@ def create_post():
 @main.route("/vote/<userId>/<pollId>" , methods=["GET","POST"])
 @login_required
 def vote(userId,pollId):
-    poll = Poll.query.filter_by(hostId=userId).first()
+    poll = Poll.query.filter_by(id=pollId).first()
     pollOption=[]
     pollOption.append(poll.option1)
     pollOption.append(poll.option2)
@@ -74,13 +76,13 @@ def vote(userId,pollId):
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
     if request.method == 'GET':
-        return render_template("vote.html",userId=userId,pollId=int(poll.id),title=poll.title,pollOption=pollOption)
+        return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
         index=pollOption.index(select)
         option=f"option{index+1}"
-        polling = Pollings.query.filter_by( pollId = poll.id).first()
-        percentpoll = Percentpoll.query.filter_by( pollId = poll.id).first()
+        polling = Pollings.query.filter_by( id = poll.id).first()
+        percentpoll = Percentpoll.query.filter_by( id = poll.id).first()
         sum=polling.option1+polling.option2+polling.option3+polling.option4+polling.option5+polling.option6+polling.option7+polling.option8+polling.option9+polling.option10+1
         
         if option=="option1":

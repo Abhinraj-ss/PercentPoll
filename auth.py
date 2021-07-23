@@ -67,6 +67,7 @@ def login_post():
     print(type(next))
     if next != "/":
         print("none alla")
+        login_user(user, remember=remember)
         return redirect(request.form.get('next'))
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)

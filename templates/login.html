@@ -8,9 +8,6 @@
 		<div class="col-sm-6 offset-sm-3">
 		<div class="shadow-lg mb-5 rounded" id="bottomPad">
 		<form action="/login" method="post" >
-        
-                
-           
 			    <div id="topPad">
 			        {% with messages = get_flashed_messages() %}
                     {% if messages %}
@@ -35,9 +32,15 @@
 					<label>
 					  <input type="checkbox" checked="checked" name="remember"> Remember me
 					</label>
-					<span class="psw"><a href="{{url_for('auth.register')}}">New User?</a></span>
+					{% set arg = next.split('/vote/') %}
+					
 				  </div> 
-				</form> 
+				</form>
+				<form action="/register" method="GET">
+                  <input type="hidden" name="next" value="{{arg[1]}}"/>
+                  <span class="psw"><input type="submit" value="New User?"/></span>
+                </form>
+
 			</div>
 		</div>
 	</div>

@@ -14,8 +14,6 @@ def index():
     percents=[]
     for poll in polls:
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
-    print(percents[0])
-    print(percents[1])
     zipped=zip(polls,percents)
     return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
 

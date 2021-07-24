@@ -13,7 +13,7 @@
 			       {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         <div class="notification is-danger" id ="alert">
-                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}" style="color:#FFFFFF; padding-left:0.5em;"> login page</a>.
+                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login',next=next) }}" style="color:#FFFFFF; padding-left:0.5em;"> login page</a>.
                         </div>
                     {% endif %}
                     {% endwith %}
@@ -28,7 +28,7 @@
 
 					<label for="psw"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="password" required>
-
+                    <input type="hidden" name="next" value="{{next}}">
 					<button type="submit" >Register </button>
 					
 				  </div>

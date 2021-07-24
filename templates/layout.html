@@ -28,7 +28,7 @@
                             <a href="{{ url_for('auth.login') }}" id="logo" class="navbar-item">
                                 Login
                             </a>
-                            <a href="{{ url_for('auth.register') }}" id="logo" class="navbar-item">
+                            <a href="{{ url_for('auth.register',next='/') }}" id="logo" class="navbar-item">
                                 Sign Up
                             </a>
                             {% endif %}

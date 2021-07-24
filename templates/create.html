@@ -30,13 +30,21 @@
      	<div class="shadow-lg mb-5 rounded">
     	<div class="jumbotron">
      	<label for="closing">Closes On:</label>
-		<input type="date" id="card" class="form-control"  name="closing" min="<?= date('Y-m-d'); ?>" required>
+     	<div class="row">
+     	    <div class="col-8">
+		        <input type="date" id="card" class="form-control"  name="date" required>
+		    </div>
+		    <div class="col-3 offset-1">
+		        <input type="time" id="card"  name="time" min="09:00" max="18:00" required>
+		    </div>
+		</div>
+		
           <label id= "topPad">Percent Poll link:</label>
           <input type="text" class="form-control input-monospace input-sm " id="link" value="http://127.0.0.1:5000/vote/{{hostId}}/{{pollId}}"  readonly>
         </div>
       </div>
         <div class="col" style="display:flex">
-          <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()"id= "create" value="Create & Copy link">
+          <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()" id= "create" value="Create & Copy link">
       </div>
       
       </form>

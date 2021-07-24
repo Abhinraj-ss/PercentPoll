@@ -17,6 +17,7 @@ $(document).ready(function() {
 	})
 });
 
+
 function copyLink() {
  
   var copyText = document.getElementById("link");
@@ -29,3 +30,5 @@ function copyLink() {
 
 var today = new Date().toISOString().split('T')[0];
 document.getElementsByName("closing")[0].setAttribute('min', today);
+
+

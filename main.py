@@ -13,11 +13,15 @@ main = Blueprint('main', __name__)
 def index():
     polls = Poll.query.filter_by( hostId=current_user.id).all()
     percents=[]
+    today = datetime.datetime.now() 
+    date_today = today.strftime("%d/%m/%Y")
+    print(type(today))
+    print(today)
     for poll in polls:
+        print(poll.date)
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     zipped=zip(polls,percents)
     return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
-
 
 
 
@@ -25,10 +29,7 @@ def index():
 def create():
     if request.method == 'GET':
     
-        today = date.today()
-        date_today = today.strftime("%d/%m/%Y")
-        print(date_today)
-
+        
         polls=Poll.query.filter_by(hostId=current_user.id).all()
         lastPoll = Poll.query.order_by(Poll.id.desc()).first()
         if polls:
@@ -39,8 +40,10 @@ def create():
     
         title=request.form['title']
         pollOption=request.form.getlist('pollOption[]')
-        closing=request.form['closing']
-        closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d')
+        date=request.form['date']
+        time=request.form['time']
+        closing=date+" "+time
+        closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d %H:%M')
         print(closing_date)
         print(closing)
         print(type(closing))

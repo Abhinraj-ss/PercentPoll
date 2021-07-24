@@ -3,7 +3,7 @@
 {% block title %}Create Poll{% endblock %}
 
 {% block body %}
-  <h2 class="text-center">Create Poll</h2>
+  <h2 class="text-center">CREATE POLL</h2>
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
   
@@ -27,14 +27,18 @@
 			</div>	 
      	</div>	  
      	</div>
+     	<div class="shadow-lg mb-5 rounded">
+    	<div class="jumbotron">
      	<label for="closing">Closes On:</label>
-		<input type="date" id="card" class="form-control"  name="closing" required>
+		<input type="date" id="card" class="form-control"  name="closing" min="<?= date('Y-m-d'); ?>" required>
           <label id= "topPad">Percent Poll link:</label>
           <input type="text" class="form-control input-monospace input-sm " id="link" value="http://127.0.0.1:5000/vote/{{hostId}}/{{pollId}}"  readonly>
-      
+        </div>
+      </div>
         <div class="col" style="display:flex">
           <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()"id= "create" value="Create & Copy link">
       </div>
+      
       </form>
       
     </div>

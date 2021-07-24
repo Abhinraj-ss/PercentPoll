@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Table
+from sqlalchemy import Column, Integer, String, ForeignKey, Table, DateTime
 from flask_login import UserMixin
+import datetime 
 from . import db
 
 class User(UserMixin, db.Model):
@@ -24,7 +25,7 @@ class Poll( db.Model):
     option8 = db.Column(db.String(20))
     option9 = db.Column(db.String(20))
     option10 = db.Column(db.String(20))
-    date=db.Column(db.String(20))
+    date=db.Column(db.DateTime, default=datetime.datetime.utcnow)
     pollings=db.relationship("Pollings",backref='poll')
     pollings=db.relationship("Percentpoll",backref='poll')
  

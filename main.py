@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from flask import Blueprint
 from datetime import date
+import datetime
 from . import db
 from .models import Poll, Pollings, Percentpoll
 
@@ -39,11 +40,15 @@ def create():
         title=request.form['title']
         pollOption=request.form.getlist('pollOption[]')
         closing=request.form['closing']
-        
+        closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d')
+        print(closing_date)
+        print(closing)
+        print(type(closing))
+        print(type(closing_date))
         for i in range(len(pollOption),10):
             pollOption.append('NONE')
                 
-        new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing)
+        new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing_date)
         
         new_pollings=Pollings(pollId=new_poll.id,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         

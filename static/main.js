@@ -25,3 +25,7 @@ function copyLink() {
   document.execCommand("copy");
   alert("Copied the text: " + copyText.value);
 } 
+
+
+var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("closing")[0].setAttribute('min', today);

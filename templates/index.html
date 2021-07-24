@@ -15,10 +15,9 @@
       </div>
       </div>
       <a class="blink-bg" id= "create"  href="{{url_for('main.create')}}">CREATE POLL</a>
-      <a href="/datepicker" value="datepicker">datepicker</a>
       <hr/>
       <h3 class="text-center">Current Polls</h3>
-      {% for poll, percent in zipped_data %}
+      {% for poll, percent in current_polls %}
         <hr/>
         <div class="shadow-lg mb-5 rounded">
           <div class="card w-100" style="margin-top:2em;">
@@ -88,13 +87,12 @@
         {% endfor %} 
       	<hr/>
       	
-       <h3 class="text-center">Recent Polls</h3>
+       <h3 class="text-center">Closed Polls</h3>
        <div class="shadow-lg mb-5 rounded">
           <div class="card w-100">
 		      <div class="card-body">
-			    <h5 class="card-title">Card title</h5>
-			    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-			    <a href="/view" class="btn btn-primary" id="view">View Poll</a>
+			    <h5 class="card-title">View Your Closed Polls</h5>
+			    <a href="/view" class="btn btn-primary" id="view">View Polls</a>
 		      </div>
 		    </div>
         </div>

@@ -26,6 +26,7 @@ class Poll( db.Model):
     option9 = db.Column(db.String(20))
     option10 = db.Column(db.String(20))
     date=db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    closed=db.Column(db.Boolean,default=False)
     pollings=db.relationship("Pollings",backref='poll')
     pollings=db.relationship("Percentpoll",backref='poll')
  

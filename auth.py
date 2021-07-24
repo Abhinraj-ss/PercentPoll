@@ -11,7 +11,6 @@ def login():
     if request.method == 'GET':
     
         next=request.args.get('next', '')
-        print(request.args.get('next', ''))
         return render_template('login.html',next=next)
         
     if request.method == 'POST':
@@ -26,7 +25,6 @@ def login():
             return redirect(url_for('auth.login')) 
         next=request.form.get('next')
         args=next.split('/',4)
-        print(args)
         if next != "/" and next !='' and next[1] == "vote"  :
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',userId=int(args[2]),pollId=int(args[3])))
@@ -48,9 +46,7 @@ def logout():
 @auth.route("/register", methods=["GET","POST"])
 def register():
     if request.method == 'GET':
-        print("yes")
         next=request.args.get('next', '')
-        print(next)
         return render_template('register.html',next=next)
     if request.method == 'POST':
         username = request.form.get('username')

@@ -11,17 +11,21 @@ main = Blueprint('main', __name__)
 @main.route("/" )
 @login_required
 def index():
-    polls = Poll.query.filter_by( hostId=current_user.id).all()
-    percents=[]
     today = datetime.datetime.now() 
     date_today = today.strftime("%d/%m/%Y")
-    print(type(today))
-    print(today)
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+    for poll in polls:
+        if poll.date<=today:
+            poll.closed=True
+    
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+    percents=[]
+    
     for poll in polls:
         print(poll.date)
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
-    zipped=zip(polls,percents)
-    return render_template("index.html",name=current_user.username.title(),zipped_data=zipped)
+    current=zip(polls,percents)
+    return render_template("index.html", name=current_user.username.title(),current_polls=current)
 
 
 
@@ -51,8 +55,8 @@ def create():
         for i in range(len(pollOption),10):
             pollOption.append('NONE')
                 
-        new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing_date)
-        
+        new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing_date,closed=False)
+        print(new_poll.closed)
         new_pollings=Pollings(pollId=new_poll.id,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         
         new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
@@ -82,6 +86,12 @@ def vote(userId,pollId):
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
     if request.method == 'GET':
+    
+        today = datetime.datetime.now() 
+        
+        if poll.date<=today:
+            poll.closed=True
+            return redirect(url_for('main.index'))
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
@@ -164,9 +174,21 @@ def vote(userId,pollId):
     
 @main.route("/view")
 def view():
-    poll = Poll.query.filter_by( hostId=current_user.id).first()
-    percent=Percentpoll.query.filter_by( pollId=poll.id).first()
-    return render_template("view.html",poll=poll,percent=percent)
+    today = datetime.datetime.now() 
+    date_today = today.strftime("%d/%m/%Y")
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+    for poll in polls:
+        if poll.date<=today:
+            poll.closed=True
+    
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=True).all()
+    percents=[]
+    
+    for poll in polls:
+        print(poll.date)
+        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
+    current=zip(polls,percents)
+    return render_template("view.html", name=current_user.username.title(),current_polls=current)
 	    
 
 

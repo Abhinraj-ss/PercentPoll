@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
 h1 {
- padding-left: 1em;
  font-weight:bold;
- color:#303A52;
- font-family:"Raleway",sans-serif;
+ color:white;
+ font-family: 'Orienta', sans-serif;
 }
 
 footer {
   padding-top: 2em;
+  padding-bottom:2em;
 }
 h2 {
    font-weight:bold;
@@ -16,6 +19,9 @@ h3 {
    font-weight:bold;
    margin: 1em 0;
   }
+#me{
+    color: #9c27b0;
+    }
 #logo{
  padding-left: 1em;
  	}
@@ -36,12 +42,21 @@ h3 {
 #card{
 	display: flex;
 	height: 50px;
+	background-color:#9c27b0
 	}
-#header{
-	background: #90CAF9 !important;
+#date{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #9c27b0;
+    box-sizing: border-box;
+	}
 }
 #body{
-	background: #E3F2FD !important;
+	background: #FE82EE !important;
 }
 h4{
 	margin: 1em;
@@ -54,14 +69,18 @@ h4{
     padding-bottom:2em;
     }	
 
-
+#nav{
+    color:white;
+    padding-right:2em;
+    font-weight:bold;
+    }
 
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #0063B1;
+  border: 1px solid #9c27b0;
   box-sizing: border-box;
 }
 
@@ -127,21 +146,7 @@ span.psw {
   }
 } 
 
-.blink-bg{
-    display flex;
-	color: #fff;
-	padding: 10px;
-	display: inline-block;
-	border-radius: 5px;
-	animation: blinkingBackground 2s infinite;
-}
-@keyframes blinkingBackground{
-	0%		{ background-color: #10c018;}
-	25%		{ background-color: #1056c0;}
-	50%		{ background-color: #ef0a1a;}
-	75%		{ background-color: #254878;}
-	100%	        { background-color: #04a1d5;}
-}
+
 
 #alert{
     display: flex;
@@ -151,11 +156,53 @@ span.psw {
 	justify-content: center;
 	align-items: center;
 	color:white;
-	background-color: #ff0f0f;
+	background-color: #9c27b0;
 	border:2px;
 	}
-	
 
+body{
+	font-family: 'Roboto', sans-serif;
+}
+* {
+	margin: 0;
+	padding: 0;
+}
+i {
+	margin-right: 10px;
+}
+
+.navbar-logo{
+	padding: 15px;
+	color: #fff;
+}
+.navbar-mainbg{
+	background-color: #9c27b0;
+	padding: 0px;
+}
+
+
+
+@media(min-width: 992px){
+	.navbar-expand-custom {
+	    -ms-flex-flow: row nowrap;
+	    flex-flow: row nowrap;
+	    -ms-flex-pack: start;
+	    justify-content: flex-start;
+	}
+	.navbar-expand-custom .navbar-nav {
+	    -ms-flex-direction: row;
+	    flex-direction: row;
+	}
+	.navbar-expand-custom .navbar-toggler {
+	    display: none;
+	}
+	.navbar-expand-custom .navbar-collapse {
+	    display: -ms-flexbox!important;
+	    display: flex!important;
+	    -ms-flex-preferred-size: auto;
+	    flex-basis: auto;
+	}
+}
 
 
 

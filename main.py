@@ -48,10 +48,6 @@ def create():
         time=request.form['time']
         closing=date+" "+time
         closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d %H:%M')
-        print(closing_date)
-        print(closing)
-        print(type(closing))
-        print(type(closing_date))
         for i in range(len(pollOption),10):
             pollOption.append('NONE')
                 
@@ -91,7 +87,8 @@ def vote(userId,pollId):
         
         if poll.date<=today:
             poll.closed=True
-            return redirect(url_for('main.index'))
+            message="Requested Poll has been closed!"
+            return render_template("index.html",message=message)
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']
@@ -142,29 +139,7 @@ def vote(userId,pollId):
         percentpoll.option8=(polling.option8/sum)*100
         percentpoll.option9=(polling.option9/sum)*100
         percentpoll.option10=(polling.option10/sum)*100
-           
-        print(polling.option1)
-        print(percentpoll.option1)
-        print(polling.option2)
-        print(percentpoll.option2)
-        print(polling.option3)
-        print(percentpoll.option3)
-        print(polling.option4)
-        print(percentpoll.option4)
-        print(polling.option5)
-        print(percentpoll.option5)
-        print(polling.option6)
-        print(percentpoll.option6)
-        print(polling.option7)
-        print(percentpoll.option7)
-        print(polling.option8)
-        print(percentpoll.option8)
-        print(polling.option9)
-        print(percentpoll.option9)
-        print(polling.option10)
-        print(percentpoll.option10)
-            
-            
+        
         db.session.commit()   
         return redirect(url_for('main.index'))
    

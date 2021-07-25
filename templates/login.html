@@ -1,46 +1,45 @@
 {% extends "layout.html" %}
 {% block title %}Log In{% endblock %}
 {% block body %}
-  <h2 class="text-center">Log In </h2>
-  <div class="row">
-	<div class="col-sm-6 offset-sm-3">
-	    <div class="shadow-lg mb-5 rounded" id="bottomPad">
-	    <form action="/login" method="post" >
-	        <div id="topPad">
-	            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="notification is-danger" id ="alert">
-                        {{ messages[0] }}
+    <h2 class="text-center">LOG IN </h2>
+    <div class="row">
+        <div class="col-md-6 offset-sm-3">
+            <div class="shadow-lg mb-8 rounded"  style="padding-bottom:5em;">
+                <form action="/login" method="post" >
+                    <div id="topPad">
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="notification is-danger" id ="alert">
+                            {{ messages[0] }}
+                        </div>
+                        {% endif %}
+                        {% endwith %}
                     </div>
-                {% endif %}
-                {% endwith %}
-          </div>
-	          <div class="imgcontainer">
-		        <img src="static/img_avatar2.png" alt="Avatar" class="avatar">
-	          </div>
+                    <div class="imgcontainer">
+                        <img src="static/img_avatar2.png" alt="Avatar" class="avatar">
+                    </div>
 
-	          <div class="container">
-		        <label for="username"><b>Username</b></label>
-		        <input type="text" placeholder="Enter Username" name="username" required>
+                    <div class="container">
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="username" required>
 
-		        <label for="password"><b>Password</b></label>
-		        <input type="password" placeholder="Enter Password" name="password" required>
-                <input type="hidden" name="next" value="{{next}}">
-		        <button type="submit" style="background-color:#9c27b0;">Login</button>
-		        <label>
-		          <input type="checkbox" checked="checked" name="remember"> Remember me
-		        </label>
-		        {% set arg = next.split('/vote/') %}
-		        
-	          </div> 
-	        </form>
-	        <form action="/register" method="GET">
-              <input type="hidden" name="next" value="{{arg[1]}}"/>
-              <span class="psw"><input type="submit" value="New User?"/></span>
-            </form>
-
-		    </div>
-	    </div>
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <input type="hidden" name="next" value="{{next}}">
+                        <button type="submit" style="background-color:#9c27b0;margin-top:2em;">LOG IN</button>
+                        <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                        {% set arg = next.split('/vote/') %}
+                 
+                </form>
+                <form action="/register" method="GET">
+                    <input type="hidden" name="next" value="{{arg[1]}}"/>
+                    <span class="psw"><button type="submit" style="background-color:#9c27b0;" value="New User?">New User?</button>
+                    </span>
+                </form>
+                   </div>
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock %}

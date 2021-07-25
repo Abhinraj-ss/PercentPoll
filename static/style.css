@@ -13,6 +13,7 @@ footer {
 }
 h2 {
    font-weight:bold;
+   font-size:40px;
    margin: 1em 0;
   }
 h3 {
@@ -141,23 +142,20 @@ span.psw {
     display: block;
     float: none;
   }
-  .cancelbtn {
-    width: 100%;
-  }
+  
 } 
 
 
 
 #alert{
-    display: flex;
+    text-align:center;
 	height: 50px;
 	font-weight:bold;
 	margin: 2em;
 	justify-content: center;
 	align-items: center;
 	color:white;
-	background-color: #9c27b0;
-	border:2px;
+	background-color:#9c27b0 ;
 	}
 
 body{

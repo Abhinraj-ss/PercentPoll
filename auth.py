@@ -18,12 +18,10 @@ def login():
         password = request.form.get('password')
         remember = True if request.form.get('remember') else False
         user = User.query.filter_by(username=username).first()
-
-        
+        next=request.form.get('next')
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
-            return redirect(url_for('auth.login')) 
-        next=request.form.get('next')
+            return redirect(url_for('auth.login',next=next))
         args=next.split('/',4)
         if next != "/" and next !='' and next[1] == "vote"  :
             login_user(user, remember=remember)

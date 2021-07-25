@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
 
 h1 {
     color:white;
@@ -17,8 +17,7 @@ h2 {
    font-weight:bold;
    color:#9c27b0;
    font-size:40px;
-        font-family: 'Titillium Web', sans-serif;
-   
+   font-family: 'Titillium Web', sans-serif;
    margin-top: 0.5em;
   }
 h3 {
@@ -31,8 +30,8 @@ h3 {
     }
 #unleash{
     color:white;
-    font-size:80px;
-    font-family: 'Montserrat', sans-serif;
+    font-size:65px;
+    font-family: 'Zen Tokyo Zoo', cursive;
     letter-spacing: 1px;
     }
 #me{

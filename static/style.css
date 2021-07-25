@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
 
 h1 {
     color:white;
@@ -16,7 +17,9 @@ h2 {
    font-weight:bold;
    color:#9c27b0;
    font-size:40px;
-   margin-top: 1em;
+        font-family: 'Titillium Web', sans-serif;
+   
+   margin-top: 0.5em;
   }
 h3 {
    font-weight:bold;
@@ -47,14 +50,14 @@ h3 {
 	align-items: center;
 	color:white;
 	background-color: #0063B1;
-	border:1px solid white;
+	border:2px solid white;
 	}
 #view{
 	background-color: #0063B1;
 	}
 #card{
 	display: flex;
-	background-color:#d7c3df;
+	background-color:WHITE;
 	border:2px solid #9c27b0;
 	}
 #date{
@@ -94,6 +97,8 @@ h4{
 	justify-content: center;
 	align-items: center;
 	color:white;
+	border-radius:15px;
+	border: 2px solid red;
 	background-color:#9c27b0 ;
 	}
 #alert{
@@ -101,10 +106,11 @@ h4{
 	height: 60px;
 	font-weight:bold;
 	margin: 2em;
+	border-radius:15px;
+	border: 2px solid red;
 	justify-content: center;
 	align-items: center;
-	color:white;
-	background-color:#9c27b0 ;
+	color:red;
 	}
 
 body{
@@ -133,8 +139,6 @@ input[type=text], input[type=password] {
 button {
   background-color: #0063B1;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -161,24 +165,19 @@ button:hover {
 
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
+  margin: 5px 0 5px 0;
 }
 
 
 img.avatar {
-  padding-top:2em;
-  width: 30%;
+  width: 35%;
 }
 
 
-.container {
-  padding: 20px;
-}
 
 
 span.psw {
   float: right;
-  padding-top: 16px;
 }
 
 

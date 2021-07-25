@@ -22,17 +22,13 @@ def login():
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login',next=next))
-        args=next.split('/',4)
-        print(args)
-        
-        print(len(args))  
+        args=next.split('/',4) 
         if next != "/" and next !='' and args[1] == "vote"  :
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',userId=int(args[2]),pollId=int(args[3])))  
         elif len(args)==2 and args[0]!='':
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',userId=int(args[0]),pollId=int(args[1])))
-    print("index")
     login_user(user, remember=remember)
     return redirect(url_for('main.index'))
     

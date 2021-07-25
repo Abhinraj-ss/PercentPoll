@@ -84,11 +84,14 @@ def vote(userId,pollId):
         if poll.date<=today:
             poll.closed=True
             message="Requested Poll has been closed!"
-            print(message)
             return render_template('index.html',message=message)
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
+    
         select = request.form['selected']
+        if select=="Select":
+            message="Please select any of the option given!!!"
+            return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message)
         index=pollOption.index(select)
         option=f"option{index+1}"
         polling = Pollings.query.filter_by( id = poll.id).first()

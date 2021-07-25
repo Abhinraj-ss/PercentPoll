@@ -59,8 +59,7 @@ def create():
         db.session.add(new_poll)
         db.session.add(new_pollings)
         db.session.commit()
-        return redirect(url_for('main.vote',userId=current_user.id,pollId=new_poll.id))
-        #return redirect(url_for('main.index')
+        return redirect(url_for('main.index'))
 
 
 
@@ -81,13 +80,12 @@ def vote(userId,pollId):
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
     if request.method == 'GET':
-    
-        today = datetime.datetime.now() 
-        
+        today = datetime.datetime.now()
         if poll.date<=today:
             poll.closed=True
             message="Requested Poll has been closed!"
-            return render_template("index.html",message=message)
+            print(message)
+            return render_template('index.html',message=message)
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
         select = request.form['selected']

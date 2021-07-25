@@ -4,27 +4,24 @@
 
 {% block body %}
  
-  <div class="row ">
+    <div class="row ">
+        <div class="col-sm-6 offset-sm-3">
+            <div id="topPad">
+                {% if message %}
+                    <div class="alert alert-warning alert-dismissible fade show " id ="alert_in" style="text-align:center;" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
+                        <span aria-hidden="true" style="float: right;color:white;">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    <div class="container-fluid" style="text-align: center;padding: 130px;">
+        <strong class="text-center " id="unleash"  >Unleash Your Polls...</strong>
+    </div>
     <div class="col-sm-6 offset-sm-3">
-        <div id="topPad">
-                    {% if message %}
-                            <div class="alert alert-warning alert-dismissible fade show " id ="alert_in" style="text-align:center;" role="alert">
-                                <strong>{{ message }}</strong>
-                                <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
-                                    <span aria-hidden="true" style="float: right;color:white;">&times;</span>
-                                  </button>
-                            </div>
-                    {% endif %}
-                  </div>
-    	<strong class="text-center " id="unleash" style="padding: 110px 30px;" >Unleash Your Polls</strong>
-     <!-- <div class="shadow-lg mb-5 rounded">
-      <div class="jumbotron align-items-center" style="text-align:center;">
-       <h5>Hi {{name}},
-        Here you can easily host a poll and get your vote for the poll by sharing the link generated.
-        Excited!!? Click on the CREATE A POLL button and start creating your poll.</h5>
-      </div>
-      </div>-->
-      <a class="btn btn-primary btn-lg" id= "create" href="{{url_for('main.create')}}">Get Started</a>
-      <hr/>
-  </div>
+        <a class="btn btn-primary btn-lg" id= "create" href="{{url_for('main.create')}}">Get Started</a>
+        <hr/>
+    </div>
 {% endblock %}

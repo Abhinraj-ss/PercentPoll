@@ -8,7 +8,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		if(x < max_fields){ 
 			x++; 
-			$(wrapper).append('<div class="form-group" id="topPad"><label for="polloption"></label><input type="text" class="form-control" name="pollOption[]" id="polloption" placeholder="Poll option" required/><a href="#" class="remove_field">Remove</a></div> ');
+			$(wrapper).append('<div class="form-group" id="topPad"><label for="polloption"></label><input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required/><a href="#" class="remove_field">Remove</a></div> ');
 		}
 	});
 	
@@ -29,10 +29,12 @@ function copyLink() {
 
 
 var today = new Date().toISOString().split('T')[0];
-document.getElementsByName("closing")[0].setAttribute('min', today);
+document.getElementsByName("date")[0].setAttribute('min', today);
 
 
-
+$(function() { 
+   $("#one").addClass("progress-bar-purple");
+});
 
 
 

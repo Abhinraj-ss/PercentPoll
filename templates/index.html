@@ -3,12 +3,12 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-  
-  <div class="row">
+ 
+  <div class="row ">
     <div class="col-sm-6 offset-sm-3">
         <div id="topPad">
                     {% if message %}
-                            <div class="alert alert-warning alert-dismissible fade show " id ="alert" role="alert">
+                            <div class="alert alert-warning alert-dismissible fade show " id ="alert_in" style="text-align:center;" role="alert">
                                 <strong>{{ message }}</strong>
                                 <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
                                     <span aria-hidden="true" style="float: right;color:white;">&times;</span>
@@ -16,96 +16,15 @@
                             </div>
                     {% endif %}
                   </div>
-    	<h2 class="text-center">Welcome to Percent Poll</h2>
-      <div class="shadow-lg mb-5 rounded">
+    	<strong class="text-center offset-1 " id="unleash" style="padding: 110px 30px;" >Unleash Your Polls...</strong>
+     <!-- <div class="shadow-lg mb-5 rounded">
       <div class="jumbotron align-items-center" style="text-align:center;">
        <h5>Hi {{name}},
         Here you can easily host a poll and get your vote for the poll by sharing the link generated.
         Excited!!? Click on the CREATE A POLL button and start creating your poll.</h5>
       </div>
-      </div>
-      <a class="btn btn-primary btn-lg" id= "create" href="{{url_for('main.create')}}">CREATE POLL</a>
+      </div>-->
+      <a class="btn btn-primary btn-lg" id= "create" href="{{url_for('main.create')}}">Get Started</a>
       <hr/>
-      <h3 class="text-center">Current Polls</h3>
-      {% for poll, percent in current_polls %}
-        <hr/>
-        <div class="shadow-lg mb-5 rounded">
-          <div class="card w-100" style="margin-top:2em;">
-		      <div class="card-body">
-		      
-			    <h5 class="card-title">{{poll.title}}</h5>
-			    <hr/>
-			    <p class="card-text">{{poll.option1}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%</div>
-			    </div>
-			    <p class="card-text">{{poll.option2}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option2}}%">{{percent.option2}}%</div>
-			    </div>
-			    {% if poll.option3 != 'NONE' %}
-			    <p class="card-text">{{poll.option3}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option3}}%">{{percent.option3}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option4 != 'NONE' %}
-			    <p class="card-text">{{poll.option4}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option4}}%">{{percent.option4}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option5 != 'NONE' %}
-			    <p class="card-text">{{poll.option5}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option5}}%">{{percent.option5}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option6 != 'NONE' %}
-			    <p class="card-text">{{poll.option6}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option6}}%">{{percent.option6}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option7 != 'NONE' %}
-			    <p class="card-text">{{poll.option7}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option7}}%">{{percent.option7}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option8 != 'NONE' %}
-			    <p class="card-text">{{poll.option8}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option8}}%">{{percent.option8}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option9 != 'NONE' %}
-			    <p class="card-text">{{poll.option9}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option9}}%">{{percent.option9}}%</div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option10 != 'NONE' %}
-			    <p class="card-text">{{poll.option10}}</p>
-			    <div class="progress">
-			      <div class="progress-bar progress-bar-striped progress-bar-animated " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option10}}%">{{percent.option10}}%</div>
-			    </div>{% endif %}
-		       
-		      </div>
-		    </div>
-		</div>
-        {% endfor %} 
-      	<hr/>
-      	
-       <h3 class="text-center">Closed Polls</h3>
-       <div class="shadow-lg mb-5 rounded">
-          <div class="card w-100">
-		      <div class="card-body">
-			    <h5 class="card-title">View Your Closed Polls</h5>
-			    <a href="/view" class="btn btn-primary" id="view">View Polls</a>
-		      </div>
-		    </div>
-        </div>
-	 
   </div>
 {% endblock %}

@@ -22,7 +22,6 @@ def index():
     percents=[]
     
     for poll in polls:
-        print(poll.date)
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
     return render_template("index.html", name=current_user.username.title(),current_polls=current)
@@ -52,7 +51,7 @@ def create():
             pollOption.append('NONE')
                 
         new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing_date,closed=False)
-        print(new_poll.closed)
+  
         new_pollings=Pollings(pollId=new_poll.id,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         
         new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
@@ -160,10 +159,24 @@ def view():
     percents=[]
     
     for poll in polls:
-        print(poll.date)
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
-    return render_template("view.html", name=current_user.username.title(),current_polls=current)
+    return render_template("view.html",page="CLOSED POLLS", current_polls=current)
 	    
-
+@main.route("/current")
+def current():
+    today = datetime.datetime.now() 
+    date_today = today.strftime("%d/%m/%Y")
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+    for poll in polls:
+        if poll.date<=today:
+            poll.closed=True
+    
+    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+    percents=[]
+    
+    for poll in polls:
+        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
+    current=zip(polls,percents)
+    return render_template("view.html",page="CURRENT POLLLS",current_polls=current)
 

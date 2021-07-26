@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 	var max_fields      = 10; 
 	var wrapper   		= $(".input_fields_wrap");
@@ -28,25 +29,52 @@ function copyLink() {
 } 
 
 
-var today = new Date().toISOString().split('T')[0];
-document.getElementsByName("date")[0].setAttribute('min', today);
 
 
-$(function() { 
-   $("#one").addClass("progress-bar-purple");
+
+
+
+
+let intro = document.querySelector(".intro");
+let logo = document.querySelector(".logo-header");
+let logoSpan = document.querySelectorAll(".logo");
+
+window.addEventListener("DOMContentLoaded", function () {
+  setTimeout(() => {
+    logoSpan.forEach((span, idx) => {
+      setTimeout(() => {
+        span.classList.add("active");
+      }, (idx + 1) * 400);
+    });
+
+    setTimeout(() => {
+      logoSpan.forEach((span, idx) => {
+        setTimeout(() => {
+          span.classList.remove("active");
+          span.classList.add("fade");
+        }, (idx + 1) * 50);
+      });
+    }, 2000);
+
+    setTimeout(() => {
+      intro.style.top = "-100vh";
+    }, 2300);
+  }, 3000);
 });
 
 
 
 
 
+function minDate(){
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("date")[0].setAttribute('min', today);
+    }
 
 
-
-
-
-
-
+$(function() { 
+   $("#one").addClass("progress-bar-purple");
+});
 
 
 

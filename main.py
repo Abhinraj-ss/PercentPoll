@@ -79,18 +79,26 @@ def vote(userId,pollId):
     pollOption.append(poll.option8)
     pollOption.append(poll.option9)
     pollOption.append(poll.option10)
+    polling = Pollings.query.filter_by( id = poll.id).first()
+    voters=polling.voters.split(';')
+    print(voters)
+    print(current_user.id)
     if request.method == 'GET':
         today = datetime.datetime.now()
         if poll.date<=today:
             poll.closed=True
-            message="Requested Poll has been closed!"
-            return render_template('index.html',message=message,first=True)
+            message="Requested Poll has been closed."
+            return render_template('index.html',message=message,first=True,borderColor="red")
+            
+        elif current_user.id in voters:
+            message="Your have already responded."
+            return render_template('index.html',message=message,first=True,borderColor="red")
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
     
         select = request.form['selected']
         if select=="Select":
-            message="Please select any of the option given!!!"
+            message="Please select any of the option given !!!"
             return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message)
         index=pollOption.index(select)
         option=f"option{index+1}"
@@ -128,6 +136,7 @@ def vote(userId,pollId):
         elif option=="option10":
             polling.option10+=1
             
+        polling.voters+=(';'+str(current_user.id))
         
         percentpoll.option1=(polling.option1/sum)*100
         percentpoll.option2=(polling.option2/sum)*100   
@@ -141,7 +150,8 @@ def vote(userId,pollId):
         percentpoll.option10=(polling.option10/sum)*100
         
         db.session.commit()   
-        return render_template("index.html",first=True)
+        message="Your response has been recorded."
+        return render_template("index.html", message=message ,first=True,borderColor="#28A828")
    
 
     

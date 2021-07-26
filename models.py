@@ -43,6 +43,7 @@ class Pollings(db.Model):
     option8 = db.Column(db.Integer)
     option9 = db.Column(db.Integer)
     option10 = db.Column(db.Integer)
+    voters= db.Column(db.String,default='0')
     
     
     

@@ -23,9 +23,16 @@ def login():
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login',next=next))
         args=next.split('/',4) 
-        if next != "/" and next !='' and args[1] == "vote"  :
-            login_user(user, remember=remember)
-            return redirect(url_for('main.vote',userId=int(args[2]),pollId=int(args[3])))  
+        
+        if next != "/" and next !='' and args[1] == "vote" :
+            if int(args[2])!=user.id:
+                login_user(user, remember=remember)
+                return redirect(url_for('main.vote',userId=int(args[2]),pollId=int(args[3])))  
+            
+            else:
+                message="Host can't participate in the poll !!!"
+                login_user(user, remember=remember)
+                return render_template('index.html',message=message,first=True,borderColor="red")
         elif len(args)==2 and args[0]!='':
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',userId=int(args[0]),pollId=int(args[1])))
@@ -58,11 +65,9 @@ def register():
         new_user = User(username=username, password=generate_password_hash(password, method='sha256'))
 
        
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-        except:
-            return 'Unable to add the user to database.'
+        db.session.add(new_user)
+        db.session.commit()
+        
 
         return redirect(url_for('auth.login',next=next))
 

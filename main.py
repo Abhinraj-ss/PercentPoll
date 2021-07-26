@@ -68,34 +68,36 @@ def create():
 @login_required
 def vote(userId,pollId):
     poll = Poll.query.filter_by(id=pollId).first()
-    pollOption=[]
-    pollOption.append(poll.option1)
-    pollOption.append(poll.option2)
-    pollOption.append(poll.option3)
-    pollOption.append(poll.option4)
-    pollOption.append(poll.option5)
-    pollOption.append(poll.option6)
-    pollOption.append(poll.option7)
-    pollOption.append(poll.option8)
-    pollOption.append(poll.option9)
-    pollOption.append(poll.option10)
-    polling = Pollings.query.filter_by( id = poll.id).first()
-    voters=polling.voters.split(';')
-    print(voters)
-    print(current_user.id)
+    if poll!=None:
+        pollOption=[]
+        pollOption.append(poll.option1)
+        pollOption.append(poll.option2)
+        pollOption.append(poll.option3)
+        pollOption.append(poll.option4)
+        pollOption.append(poll.option5)
+        pollOption.append(poll.option6)
+        pollOption.append(poll.option7)
+        pollOption.append(poll.option8)
+        pollOption.append(poll.option9)
+        pollOption.append(poll.option10)
+        polling = Pollings.query.filter_by( id = poll.id).first()
+        voters=polling.voters.split(';')
+    
     if request.method == 'GET':
         today = datetime.datetime.now()
-        if poll.date<=today:
-            poll.closed=True
-            message="Requested Poll has been closed."
-            return render_template('index.html',message=message,first=True,borderColor="red")
-            
-        elif current_user.id in voters:
-            message="Your have already responded."
-            return render_template('index.html',message=message,first=True,borderColor="red")
-        return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
-    if request.method == 'POST':
+        if poll!=None:
+            if poll.date<=today:
+                poll.closed=True
+                message="Requested Poll has been closed."
+                return render_template('index.html',message=message,first=True,borderColor="red")
+            elif current_user.id in voters:
+                message="Your have already responded."
+                return render_template('index.html',message=message,first=True,borderColor="red")
+            return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
+        message="Invalid PercentPoll link !!!"
+        return render_template('index.html',message=message,first=True,borderColor="red")
     
+    if request.method == 'POST':
         select = request.form['selected']
         if select=="Select":
             message="Please select any of the option given !!!"
@@ -108,31 +110,22 @@ def vote(userId,pollId):
         
         if option=="option1":
             polling.option1+=1
-            
         elif option=="option2":
             polling.option2+=1
-            
         elif option=="option3":
             polling.option3+=1
-            
         elif option=="option4":
             polling.option4+=1
-            
         elif option=="option5":
             polling.option5+=1
-            
         elif option=="option6":
             polling.option6+=1
-            
         elif option=="option7":
             polling.option7+=1
-            
         elif option=="option8":
             polling.option8+=1
-            
         elif option=="option9":
             polling.option9+=1
-            
         elif option=="option10":
             polling.option10+=1
             

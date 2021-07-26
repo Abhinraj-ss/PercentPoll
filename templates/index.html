@@ -6,6 +6,7 @@
     {% if first %}
         <div class="intro">
             <h1 class="logo-header">
+                <span class="logo"><img src="{{url_for('static', filename='splash-logo.png')}}" style="padding-right:3px; width: 150px;"/></span>
                 <span class="logo">Percent</span><span class="logo">Poll.</span>
             </h1>
         </div> 
@@ -23,7 +24,7 @@
                 {% endif %}
             </div>
         </div>
-    <div class="container-fluid" style="text-align: center;padding: 150px;">
+    <div class="container-fluid" style="text-align: center;padding: 180px;">
         <strong class="text-center " id="unleash"  >UNLEASH YOUR POLLS...</strong>
     </div>
     <div class="col-sm-6 offset-sm-3">

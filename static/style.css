@@ -259,8 +259,10 @@ i {
 	 top: 40%;
 	 left: 50%;
 	 transform: translate(-50%,-50%);
+	 font-size:60px;
 	 color: white;
 }
+
  .logo {
 	 position: relative;
 	 display: inline-block;

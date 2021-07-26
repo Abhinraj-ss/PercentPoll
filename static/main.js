@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       intro.style.top = "-100vh";
     }, 2300);
-  }, 3000);
+  });
 });
 
 

@@ -3,7 +3,13 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-
+    {% if first %}
+        <div class="intro">
+            <h1 class="logo-header">
+                <span class="logo">Percent</span><span class="logo">Poll.</span>
+            </h1>
+        </div> 
+    {% endif %}
     <div class="row ">
         <div class="col-sm-6 offset-sm-3">
             <div id="topPad">

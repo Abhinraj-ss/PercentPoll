@@ -30,7 +30,7 @@ def login():
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',userId=int(args[0]),pollId=int(args[1])))
     login_user(user, remember=remember)
-    return redirect(url_for('main.index'))
+    return render_template("index.html",first=True)
     
 @auth.route('/logout')
 @login_required

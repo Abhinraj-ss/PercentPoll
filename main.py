@@ -84,7 +84,7 @@ def vote(userId,pollId):
         if poll.date<=today:
             poll.closed=True
             message="Requested Poll has been closed!"
-            return render_template('index.html',message=message)
+            return render_template('index.html',message=message,first=True)
         return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
     if request.method == 'POST':
     
@@ -141,7 +141,7 @@ def vote(userId,pollId):
         percentpoll.option10=(polling.option10/sum)*100
         
         db.session.commit()   
-        return redirect(url_for('main.index'))
+        return render_template("index.html",first=True)
    
 
     

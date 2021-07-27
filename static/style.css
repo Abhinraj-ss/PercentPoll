@@ -2,13 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
 
 h1 {
     color:white;
     font-weight:bold;
     font-family: 'Poppins', sans-serif;
 }
-
+#error{
+    font-family: 'Roboto Mono', monospace;
+    color:white;
+    font-size:50px;
+    padding-left:20%;
+    }
 footer {
   padding-top: 2em;
   padding-bottom:2em;
@@ -16,7 +22,7 @@ footer {
 h2 {
    font-weight:bold;
    color:#9c27b0;
-   font-size:40px;
+   font-size:50px;
    font-family: 'Titillium Web', sans-serif;
    margin-top: 0.5em;
   }

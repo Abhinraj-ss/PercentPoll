@@ -8,6 +8,11 @@
     <div class="col-sm-6 offset-sm-3">
     	<div class="text-center">
     	<hr/>
+    	{% if  not polls %}
+    	    <img src="{{url_for('static', filename='NoPolls.png')}}" style="padding-bottom:3px; width: 500px;"/>
+    	{% endif %}
+    	
+    	
 		{% for poll, percent in current_polls %}
         <div class="shadow-lg mb-5 rounded-27" style="border-radius:27px;">
           <div class="card w-100" style="margin-top:2em;border-radius:27px;" id="card">
@@ -86,6 +91,9 @@
         {% endfor %} 
 		</div>
       	<a class="btn btn-primary btn-lg" id= "create"  href="{{url_for('main.index')}}">GO HOME</a>
+      	<hr/>
     </div>
+    
   </div>
+  
 {% endblock %}

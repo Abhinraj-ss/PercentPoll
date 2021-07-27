@@ -94,8 +94,7 @@ def vote(userId,pollId):
                 message="Your have already responded."
                 return render_template('index.html',message=message,first=True,borderColor="red")
             return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
-        message="Invalid PercentPoll link !!!"
-        return render_template('index.html',message=message,first=True,borderColor="red")
+        return render_template('error.html',first=True)
     
     if request.method == 'POST':
         select = request.form['selected']
@@ -165,7 +164,7 @@ def view():
     for poll in polls:
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
-    return render_template("view.html",page="CLOSED POLLS", current_polls=current)
+    return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current)
 	    
 @main.route("/current")
 def current():
@@ -182,5 +181,10 @@ def current():
     for poll in polls:
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
-    return render_template("view.html",page="CURRENT POLLLS",current_polls=current)
+    return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current)
+    
+    
+@main.route("/invalidPoll")
+def invalidPoll():
+    render_template("error.html")
 

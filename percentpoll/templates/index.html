@@ -2,11 +2,14 @@
 
 {% block title %}Home{% endblock %}
 
+{% block current %}{{current_count}}{% endblock %}
+{% block closed %}{{closed_count}}{% endblock %}
+
 {% block body %}
     {% if first %}
         <div class="intro">
             <h1 class="logo-header">
-                <span class="logo"><img src="{{url_for('static', filename='splash-logo.png')}}" style="padding-right:3px; width: 150px;"/></span>
+                <span class="logo"><img src="{{url_for('static', filename='splash-logo.png')}}" style="padding-right:3px; width: 120px;"/></span>
                 <span class="logo">Percent</span><span class="logo">Poll.</span>
             </h1>
         </div> 
@@ -25,9 +28,25 @@
             </div>
         </div>
     <div class="container-fluid" style="text-align: center;padding: 180px;">
-        <strong class="text-center " id="unleash"  >UNLEASH YOUR POLLS...</strong>
+        <strong class="typewrite" id="unleash" data-period="2000" data-type='[ "Hi,{{user}}.", "You are In Now.", "Unleash Your Polls."]'>
+        <span class="wrap"></span>
+        </strong>
     </div>
+    
     <div class="col-sm-6 offset-sm-3">
+    
+    <!--bouncing balls
+        <section class="wrapper">
+	          <div class="flex">
+		        <span class="circle-1"></span>
+		        <span class="circle-2"></span>
+		        <span class="circle-3"></span>
+		        <span class="circle-4"></span>
+		        <span class="circle-5"></span>
+	          </div>
+        </section> -->
+
+
         <a class="btn btn-primary btn-lg" id= "create" href="{{url_for('main.create')}}">Get Started</a>
         <hr/>
     </div>

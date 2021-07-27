@@ -25,10 +25,16 @@
                     <a class="nav-link" href="{{ url_for('main.index') }}" id="nav">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.current') }}" id="nav">CURRENT POLLS</a>
+                    <a class="nav-link" href="{{ url_for('main.current') }}" id="nav">CURRENT POLLS
+                    <span class="badge badge-light">{% block current %}{% endblock %}</span>
+                    <span class="sr-only">unread messages</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.view') }}" id="nav">CLOSED POLLS</a>
+                    <a class="nav-link" href="{{ url_for('main.view') }}" id="nav">CLOSED POLLS
+                    <span class="badge badge-light">{% block closed %}{% endblock %}</span>
+                    <span class="sr-only">unread messages</span>
+                    </a>
                 </li>
                 <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.logout') }}" id="nav">LOG OUT</a>

@@ -2,6 +2,10 @@
 
 {% block title %}Create Poll{% endblock %}
 
+{% block current %}{{current_count}}{% endblock %}
+{% block closed %}{{closed_count}}{% endblock %}
+
+
 {% block body %}
   <h2 class="text-center">CREATE POLL</h2>
   <div class="row">
@@ -23,7 +27,7 @@
 					<label for="polloption"></label>
 					<input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required>
 				  </div>
-				 <button class="add_field_button "style="display: flex;height: 50px;font-weight:bold;justify-content: center;align-items: center;color:white;background-color: #9c27b0;border:2px solid white; border-radius:27px;margin-top:2em;">Add More Poll Options</button>
+				 <button class="add_field_button "style="display: flex;height:60px;font-weight:bold;justify-content: center;align-items: center;color:white;background-color: #9c27b0;border:2px solid white; border-radius:27px;margin-top:2em;">Add More Poll Options</button>
 			</div>	 
      	</div>	  
      	</div>

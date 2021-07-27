@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from flask import Blueprint
-from datetime import date
 import datetime
 from . import db
 from .models import Poll, Pollings, Percentpoll
@@ -12,19 +11,14 @@ main = Blueprint('main', __name__)
 @login_required
 def index():
     today = datetime.datetime.now() 
-    date_today = today.strftime("%d/%m/%Y")
     polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
     
-    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
-    percents=[]
-    
-    for poll in polls:
-        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
-    current=zip(polls,percents)
-    return render_template("index.html", name=current_user.username.title(),current_polls=current)
+    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    return render_template("index.html", user=current_user.name.title(),current_count=current_count,closed_count=closed_count)
 
 
 
@@ -32,12 +26,13 @@ def index():
 def create():
     if request.method == 'GET':
     
-        
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         polls=Poll.query.filter_by(hostId=current_user.id).all()
         lastPoll = Poll.query.order_by(Poll.id.desc()).first()
         if polls:
-            return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1)
-        return render_template("create.html",hostId=current_user.id,pollId=1)
+            return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1,current_count=current_count,closed_count=closed_count)
+        return render_template("create.html",hostId=current_user.id,pollId=1,current_count=current_count,closed_count=closed_count)
     
     if request.method == 'POST':
     
@@ -64,10 +59,10 @@ def create():
 
 
 
-@main.route("/vote/<userId>/<pollId>" , methods=["GET","POST"])
+@main.route("/vote/<hostId>/<pollId>" , methods=["GET","POST"])
 @login_required
-def vote(userId,pollId):
-    poll = Poll.query.filter_by(id=pollId).first()
+def vote(hostId,pollId):
+    poll = Poll.query.filter_by(id=pollId,hostId=hostId).first()
     if poll!=None:
         pollOption=[]
         pollOption.append(poll.option1)
@@ -85,22 +80,27 @@ def vote(userId,pollId):
     
     if request.method == 'GET':
         today = datetime.datetime.now()
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         if poll!=None:
             if poll.date<=today:
                 poll.closed=True
                 message="Requested Poll has been closed."
-                return render_template('index.html',message=message,first=True,borderColor="red")
+                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red")
             elif current_user.id in voters:
                 message="Your have already responded."
-                return render_template('index.html',message=message,first=True,borderColor="red")
-            return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption)
-        return render_template('error.html',first=True)
+                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red")
+            
+            return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,current_count=current_count,closed_count=closed_count)
+        return render_template('error.html',first=True,current_count=current_count,closed_count=closed_count)
     
     if request.method == 'POST':
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         select = request.form['selected']
         if select=="Select":
             message="Please select any of the option given !!!"
-            return render_template("vote.html",userId=userId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message)
+            return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message,current_count=current_count,closed_count=closed_count)
         index=pollOption.index(select)
         option=f"option{index+1}"
         polling = Pollings.query.filter_by( id = poll.id).first()
@@ -143,7 +143,7 @@ def vote(userId,pollId):
         
         db.session.commit()   
         message="Your response has been recorded."
-        return render_template("index.html", message=message ,first=True,borderColor="#28A828")
+        return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828")
    
 
     
@@ -157,14 +157,15 @@ def view():
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
-    
+    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
     polls = Poll.query.filter_by( hostId=current_user.id, closed=True).all()
     percents=[]
     
     for poll in polls:
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
-    return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current)
+    return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current,current_count=current_count,closed_count=closed_count)
 	    
 @main.route("/current")
 def current():
@@ -174,14 +175,15 @@ def current():
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
-    
+    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
     polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
     percents=[]
     
     for poll in polls:
         percents.append(Percentpoll.query.filter_by( id=poll.id).first())
     current=zip(polls,percents)
-    return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current)
+    return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current,current_count=current_count,closed_count=closed_count)
     
     
 @main.route("/invalidPoll")

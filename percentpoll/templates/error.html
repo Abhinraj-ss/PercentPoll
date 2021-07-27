@@ -2,6 +2,10 @@
 
 {% block title %}Error-404{% endblock %}
 
+{% block current %}{{current_count}}{% endblock %}
+{% block closed %}{{closed_count}}{% endblock %}
+
+
 {% block body %}
   <img src="{{url_for('static', filename='404.png')}}" style=" margin-left:35%;width: 450px;"/>
   <div class="row">

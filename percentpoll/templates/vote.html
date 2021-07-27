@@ -2,10 +2,14 @@
 
 {% block title %}Vote{% endblock %}
 
+{% block current %}{{current_count}}{% endblock %}
+{% block closed %}{{closed_count}}{% endblock %}
+
+
 {% block body %}
   <h2 class="text-center">VOTE HERE</h2>
   
-  <form action="{{url_for('main.vote',userId=userId,pollId=pollId)}}" method="post">
+  <form action="{{url_for('main.vote',hostId=hostId,pollId=pollId)}}" method="post">
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
     <hr/>

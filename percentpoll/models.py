@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Table, DateTime
 from flask_login import UserMixin
 import datetime 
-from __init__ import db
+from . import db
 
 class User(UserMixin, db.Model):
     __table_args__ = {'extend_existing': True}

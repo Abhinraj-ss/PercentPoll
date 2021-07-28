@@ -143,7 +143,7 @@ def vote(hostId,pollId):
         
         db.session.commit()   
         message="Your response has been recorded."
-        return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828",,current_count=current_count,closed_count=closed_count)
+        return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828",current_count=current_count,closed_count=closed_count)
    
 
     

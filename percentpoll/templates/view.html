@@ -8,7 +8,7 @@
 {% block body %}
 <h2 class="text-center">{{page}}</h2>
 <div class="row">
-  <div class="col-sm-6 offset-sm-3">
+  <div class="col-sm-6" >
     <div class="text-center">
       <hr />
       {% if  not polls %}
@@ -96,8 +96,10 @@
       </div>
       {% endfor %}
     </div>
+    <div class="col-sm-6" style="display:flex;">
     <a class="btn btn-primary btn-lg" id="create" href="{{url_for('main.index')}}">GO HOME</a>
     <hr />
+    </div>
   </div>
 
 </div>

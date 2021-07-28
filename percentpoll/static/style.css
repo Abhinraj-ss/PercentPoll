@@ -19,6 +19,14 @@ footer {
   padding-top: 2em;
   padding-bottom:2em;
 }
+
+.col-sm-6{
+    justify-content: center;  
+    align-items: center;          
+    margin:auto;   
+    }
+
+
 h2 {
    font-weight:bold;
    color:#9c27b0;
@@ -36,9 +44,9 @@ h3 {
     }
 .wrap{
     justify-content: center;
-	align-items: center;
     color:white;
-    font-size:5vw;
+    position: relative;
+    font-size:9vh;
     font-family: 'Montserrat', sans-serif;
     }
 #me{
@@ -48,14 +56,19 @@ h3 {
  padding-left: 1em;
  	}
 #create{
-	display: flex;
-	height: 70px;
-	border-radius:35px;
+	height: 3em;
+	border-radius:4em;
 	font-weight:bold;
 	justify-content: center;
 	align-items: center;
 	color:white;
-	font-size:25px;
+	padding-left:3em;
+	padding-right:3em;
+	padding-top:1em;
+	padding-bottom:1em;
+	font-size:1.5em;
+	margin-left:40vw;
+	margin-right:40vw;
 	background-color: #0063B1;
 	border:2px solid white;
 	}
@@ -123,6 +136,8 @@ h4{
 body{
 	font-family: 'Roboto', sans-serif;
 	background-image: url('../static/bg.jpg');
+	width:100vw;
+    height:auto;
 	background-repeat: no-repeat;
 	background-size:cover;
 }
@@ -203,12 +218,10 @@ span.psw {
 	box-sizing:border-box;
 	font-family: 'Poppins', sans-serif;
 }
-i {
-	margin-right: 10px;
-}
 
 .navbar-logo{
 	padding: 1vw;
+	float: left;
 	color: #fff;
 }
 .navbar-mainbg{
@@ -239,7 +252,6 @@ i {
 	    flex-basis: auto;
 	}
 }
-
 
 
 

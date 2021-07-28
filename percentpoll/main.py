@@ -86,10 +86,10 @@ def vote(hostId,pollId):
             if poll.date<=today:
                 poll.closed=True
                 message="Requested Poll has been closed."
-                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red")
+                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
             elif current_user.id in voters:
                 message="Your have already responded."
-                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red")
+                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
             
             return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,current_count=current_count,closed_count=closed_count)
         return render_template('error.html',first=True,current_count=current_count,closed_count=closed_count)
@@ -143,7 +143,7 @@ def vote(hostId,pollId):
         
         db.session.commit()   
         message="Your response has been recorded."
-        return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828")
+        return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828",,current_count=current_count,closed_count=closed_count)
    
 
     
@@ -188,5 +188,7 @@ def current():
     
 @main.route("/invalidPoll")
 def invalidPoll():
-    render_template("error.html")
+    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    render_template("error.html",,current_count=current_count,closed_count=closed_count)
 

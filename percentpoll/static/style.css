@@ -36,7 +36,7 @@ h3 {
     }
 .wrap{
     color:white;
-    font-size:80px;
+    font-size:5vw;
     font-family: 'Montserrat', sans-serif;
     }
 #me{
@@ -206,13 +206,12 @@ i {
 }
 
 .navbar-logo{
-	padding: 15px;
+	padding: 1vw;
 	color: #fff;
 }
 .navbar-mainbg{
 	background-color: #9c27b0;
 	padding: 0px;
-	border-bottom:2px solid #AB47BC;
 }
 
 
@@ -288,7 +287,7 @@ i {
 
 
 
-/*bouncing balls*/
+/*bouncing balls
 
 section.wrapper{
 	display:flex;
@@ -346,7 +345,7 @@ div.flex{
 }
 
 
-
+*/
 
 
 

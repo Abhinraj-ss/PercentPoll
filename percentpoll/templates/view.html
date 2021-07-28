@@ -5,105 +5,101 @@
 {% block current %}{{current_count}}{% endblock %}
 {% block closed %}{{closed_count}}{% endblock %}
 
-
-
 {% block body %}
-  <h2 class="text-center">{{page}}</h2>
-  <div class="row">
-    <div class="col-sm-6 offset-sm-3">
-    	<div class="text-center">
-    	<hr/>
-    	{% if  not polls %}
-    	    <img src="{{url_for('static', filename='NoPolls.png')}}" style="padding-bottom:3px; width: 500px;"/>
-    	{% endif %}
-    	
-    	
-		{% for poll, percent in current_polls %}
-        <div class="shadow-lg mb-5 rounded-27" style="border-radius:27px;">
-          <div class="card w-100" style="margin-top:2em;border-radius:27px;" id="card">
-		      <div class="card-body">
-			    <h3 class="card-title">{{poll.title}}</h3>
-			    <hr/>
-			    <p class="card-text">{{poll.option1}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%
-			      </div>
-			    </div>
-			    <p class="card-text">{{poll.option2}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple  " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option2}}%">{{percent.option2}}%
-			      </div>
-			    </div>
-			    {% if poll.option3 != 'NONE' %}
-			    <p class="card-text">{{poll.option3}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option3}}%">{{percent.option3}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option4 != 'NONE' %}
-			    <p class="card-text">{{poll.option4}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option4}}%">{{percent.option4}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option5 != 'NONE' %}
-			    <p class="card-text">{{poll.option5}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option5}}%">{{percent.option5}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option6 != 'NONE' %}
-			    <p class="card-text">{{poll.option6}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option6}}%">{{percent.option6}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option7 != 'NONE' %}
-			    <p class="card-text">{{poll.option7}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option7}}%">{{percent.option7}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option8 != 'NONE' %}
-			    <p class="card-text">{{poll.option8}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option8}}%">{{percent.option8}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option9 != 'NONE' %}
-			    <p class="card-text">{{poll.option9}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple  " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option9}}%">{{percent.option9}}%
-			      </div>
-			    </div>
-			    {% endif %}
-			    {% if poll.option10 != 'NONE' %}
-			    <p class="card-text">{{poll.option10}}</p>
-			    <div class="progress">
-			      <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option10}}%">{{percent.option10}}%
-			      </div>
-			    </div>{% endif %}
-			    <hr/>
-			    <label id= "topPad" style="font-weight:bold;font-size:20px;">PercentPoll link:</label>
-                <input type="text" class="form-control input-monospace input-sm " id="link" value="https://percentpoll.herokuapp.com/vote/{{poll.hostId}}/{{poll.id}}"  readonly>
-			    
-			    
-		       <hr/>
-		      </div>
-		    </div>
-		</div>
-        {% endfor %} 
-		</div>
-      	<a class="btn btn-primary btn-lg" id= "create"  href="{{url_for('main.index')}}">GO HOME</a>
-      	<hr/>
+<h2 class="text-center">{{page}}</h2>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    <div class="text-center">
+      <hr />
+      {% if  not polls %}
+      <img src="{{url_for('static', filename='NoPolls.png')}}" style="padding-bottom:3px; width: 500px;" />
+      {% endif %}
+
+      {% for poll, percent in current_polls %}
+      <div class="shadow-lg mb-5 rounded-27" style="border-radius:27px;">
+        <div class="card w-100" style="margin-top:2em;border-radius:27px;" id="card">
+          <div class="card-body">
+            <h3 class="card-title">{{poll.title}}</h3>
+            <hr />
+            <p class="card-text">{{poll.option1}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option1}}%">{{percent.option1}}%
+              </div>
+            </div>
+            <p class="card-text">{{poll.option2}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple  " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option2}}%">{{percent.option2}}%
+              </div>
+            </div>
+            {% if poll.option3 != 'NONE' %}
+            <p class="card-text">{{poll.option3}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option3}}%">{{percent.option3}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option4 != 'NONE' %}
+            <p class="card-text">{{poll.option4}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option4}}%">{{percent.option4}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option5 != 'NONE' %}
+            <p class="card-text">{{poll.option5}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option5}}%">{{percent.option5}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option6 != 'NONE' %}
+            <p class="card-text">{{poll.option6}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option6}}%">{{percent.option6}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option7 != 'NONE' %}
+            <p class="card-text">{{poll.option7}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option7}}%">{{percent.option7}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option8 != 'NONE' %}
+            <p class="card-text">{{poll.option8}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option8}}%">{{percent.option8}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option9 != 'NONE' %}
+            <p class="card-text">{{poll.option9}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple  " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option9}}%">{{percent.option9}}%
+              </div>
+            </div>
+            {% endif %}
+            {% if poll.option10 != 'NONE' %}
+            <p class="card-text">{{poll.option10}}</p>
+            <div class="progress">
+              <div class="progress-bar-purple " role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{percent.option10}}%">{{percent.option10}}%
+              </div>
+            </div>{% endif %}
+            <hr />
+            <label id="topPad" style="font-weight:bold;font-size:20px;">PercentPoll link:</label>
+            <input type="text" class="form-control input-monospace input-sm " id="link" value="https://percentpoll.herokuapp.com/vote/{{poll.hostId}}/{{poll.id}}" readonly>
+
+            <hr />
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
-    
+    <a class="btn btn-primary btn-lg" id="create" href="{{url_for('main.index')}}">GO HOME</a>
+    <hr />
   </div>
-  
+
+</div>
+
 {% endblock %}

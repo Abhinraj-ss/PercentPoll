@@ -5,41 +5,40 @@
 {% block current %}{{current_count}}{% endblock %}
 {% block closed %}{{closed_count}}{% endblock %}
 
-
 {% block body %}
-  <h2 class="text-center">VOTE HERE</h2>
-  
-  <form action="{{url_for('main.vote',hostId=hostId,pollId=pollId)}}" method="post">
+<h2 class="text-center">VOTE HERE</h2>
+
+<form action="{{url_for('main.vote',hostId=hostId,pollId=pollId)}}" method="post">
   <div class="row">
     <div class="col-sm-6 offset-sm-3">
-    <hr/>
-         <div id="topPad">
-                        {% if message %}
-                        <div class="notification is-danger" id ="alert">
-                            {{ message }}
-                        </div>
-                        {% endif %}
-                    </div>
-    	<div class="shadow-lg mb-5 rounded">
-        	<div class="jumbotron" style="background-color:white;border:2px solid #9c27b0;">
-        	    
-            	<div class="text-center">
-            		<h3>{{title}}</h3>
-            		<hr/>
-                      <select class="custom-select custom-select-lg mb-3" name="selected" >
-                          <option selected >Select</option>
-                          {% for option in pollOption %}
-                            {% if 'NONE' not in option %}
-                                <option>{{option}}</option>
-                            {% endif %}
-                          {% endfor %}
-                      </select>
-	             </div>
-             </div>
+      <hr />
+      <div id="topPad">
+        {% if message %}
+        <div class="notification is-danger" id="alert">
+          {{ message }}
         </div>
+        {% endif %}
+      </div>
+      <div class="shadow-lg mb-5 rounded">
+        <div class="jumbotron" style="background-color:white;border:2px solid #9c27b0;">
+
+          <div class="text-center">
+            <h3>{{title}}</h3>
+            <hr />
+            <select class="custom-select custom-select-lg mb-3" name="selected">
+              <option selected>Select</option>
+              {% for option in pollOption %}
+              {% if 'NONE' not in option %}
+              <option>{{option}}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
       <button class="btn btn-primary btn-lg" type="submit" style="background-color:#9c27b0;margin-top:2em;border-radius:27px;padding: 14px 20px;margin: 8px 0;">DONE</button>
-    <a class="btn btn-primary btn-lg" id= "create"  href="/">GO HOME</a>
+      <a class="btn btn-primary btn-lg" id="create" href="/">GO HOME</a>
     </div>
   </div>
-  </form>
+</form>
 {% endblock %}

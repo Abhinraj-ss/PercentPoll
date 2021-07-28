@@ -3,39 +3,39 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-  <h2 class="text-center">REGISTER</h2>
-  <div class="row">
-		<div class="col-md-4 offset-sm-4">
-		    <div class="shadow-lg mb-5 rounded"  style="background-color:white;padding-bottom:3em;" id="card">
-			   <form action="/register" method="post" >
-			    <div id="topPad">
-			       {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <div class="notification is-danger" id ="alert">
-                            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login',next=next) }}" style="color:#9c27b0; padding-left:0.5em;"> login page</a>.
-                        </div>
-                    {% endif %}
-                    {% endwith %}
-                  </div>
-				  <div class="imgcontainer">
-					<img src="static/profile.png" alt="Avatar" class="avatar">
-				  </div>
+<h2 class="text-center">REGISTER</h2>
+<div class="row">
+  <div class="col-md-4 offset-sm-4">
+    <div class="shadow-lg mb-5 rounded" style="background-color:white;padding-bottom:3em;" id="card">
+      <form action="/register" method="post">
+        <div id="topPad">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class="notification is-danger" id="alert">
+            {{ messages[0] }}. Go to <a href="{{ url_for('auth.login',next=next) }}" style="color:#9c27b0; padding-left:0.5em;"> login page</a>.
+          </div>
+          {% endif %}
+          {% endwith %}
+        </div>
+        <div class="imgcontainer">
+          <img src="static/profile.png" alt="Avatar" class="avatar">
+        </div>
 
-				  <div class="container">
-				    <label for="name"><b>Name</b></label>
-                    <input type="text" placeholder="Enter Name" name="name" required>
+        <div class="container">
+          <label for="name"><b>Name</b></label>
+          <input type="text" placeholder="Enter Name" name="name" required>
 
-					<label for="uname"><b>Username</b></label>
-					<input type="text" placeholder="Enter Username" name="username" required>
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="username" required>
 
-					<label for="psw"><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" name="password" required>
-                    <input type="hidden" name="next" value="{{next}}">
-					<button type="submit" style="background-color:#9c27b0;margin-top:2em;border-radius:27px;padding: 14px 20px;margin: 8px 0;" >REGISTER </button>
-				  </div>
-				</form> 
-			</div>
-		</div>
-	</div>
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" required>
+          <input type="hidden" name="next" value="{{next}}">
+          <button type="submit" style="background-color:#9c27b0;margin-top:2em;border-radius:27px;padding: 14px 20px;margin: 8px 0;">REGISTER </button>
+        </div>
+      </form>
+    </div>
   </div>
+</div>
+</div>
 {% endblock %}

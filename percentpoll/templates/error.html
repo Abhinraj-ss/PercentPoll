@@ -5,17 +5,16 @@
 {% block current %}{{current_count}}{% endblock %}
 {% block closed %}{{closed_count}}{% endblock %}
 
-
 {% block body %}
-  <img src="{{url_for('static', filename='404.png')}}" style=" margin-left:35%;width: 450px;"/>
-  <div class="row">
-    <div class="col-sm-6 offset-sm-3">
-   
+<img src="{{url_for('static', filename='404.png')}}" style=" margin-left:35%;width: 450px;" />
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
     <strong id="error">Poll Not Found</strong><br>
-    <strong style="color:white;margin-left:25%;">You were trying to access an invalid  poll</strong>
-     <hr/>
-    <a class="btn btn-primary btn-lg" id= "create"  href="/">GO HOME</a>
-    </div>
+    <strong style="color:white;margin-left:25%;">You were trying to access an invalid poll</strong>
+    <hr />
+    <a class="btn btn-primary btn-lg" id="create" href="/">GO HOME</a>
   </div>
-  </div>
+</div>
+</div>
 {% endblock %}

@@ -5,54 +5,53 @@
 {% block current %}{{current_count}}{% endblock %}
 {% block closed %}{{closed_count}}{% endblock %}
 
-
 {% block body %}
-  <h2 class="text-center">CREATE POLL</h2>
-  <div class="row">
-    <div class="col-sm-6 offset-sm-3">
-  
-    <div class="shadow-lg mb-5 rounded" >
-    	<div class="jumbotron" style="border-radius-top:27px;">
-      		<form action="/create" method="post" >
-			  <div class="form-group">
-				<label for="title">Title text</label>
-				<input type="text" class="form-control" name="title" id="option" placeholder="Title" required>
-			  </div>
-			  <div class="input_fields_wrap">
-				  <div class="form-group">
-					<label for="polloption"></label>
-					<input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required>
-				  </div>
-				  <div class="form-group" id="topPad">
-					<label for="polloption"></label>
-					<input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required>
-				  </div>
-				 <button class="add_field_button "style="display: flex;height:60px;font-weight:bold;justify-content: center;align-items: center;color:white;background-color: #9c27b0;border:2px solid white; border-radius:27px;margin-top:2em;">Add More Poll Options</button>
-			</div>	 
-     	</div>	  
-     	</div>
-     	<div class="shadow-lg mb-5 rounded">
-    	<div class="jumbotron">
-     	<label for="closing">Closes On:</label>
-     	<div class="row">
-     	    <div class="col-8">
-		        <input type="date" id="date" class="form-control" onclick="minDate()" name="date" required>
-		    </div>
-		    <div class="col-3 offset-1">
-		        <input type="time" id="date"  name="time" required>
-		    </div>
-		</div>
-		
-          <label id= "topPad">PercentPoll link:</label>
-          <input type="text" class="form-control input-monospace input-sm " id="link" value="https://percentpoll.herokuapp.com/vote/{{hostId}}/{{pollId}}"  readonly>
-        </div>
+<h2 class="text-center">CREATE POLL</h2>
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <div class="shadow-lg mb-5 rounded">
+      <div class="jumbotron" style="border-radius-top:27px;">
+        <form action="/create" method="post">
+          <div class="form-group">
+            <label for="title">Title text</label>
+            <input type="text" class="form-control" name="title" id="option" placeholder="Title" required>
+          </div>
+          <div class="input_fields_wrap">
+            <div class="form-group">
+              <label for="polloption"></label>
+              <input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required>
+            </div>
+            <div class="form-group" id="topPad">
+              <label for="polloption"></label>
+              <input type="text" class="form-control" name="pollOption[]" id="option" placeholder="Poll option" required>
+            </div>
+            <button class="add_field_button " style="display: flex;height:60px;font-weight:bold;justify-content: center;align-items: center;color:white;background-color: #9c27b0;border:2px solid white; border-radius:27px;margin-top:2em;">Add More Poll Options</button>
+          </div>
       </div>
-        <div class="col" style="display:flex">
-          <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()" id= "create" value="Create & Copy link">
-      </div>
-      
-      </form>
-      
     </div>
+    <div class="shadow-lg mb-5 rounded">
+      <div class="jumbotron">
+        <label for="closing">Closes On:</label>
+        <div class="row">
+          <div class="col-8">
+            <input type="date" id="date" class="form-control" onclick="minDate()" name="date" required>
+          </div>
+          <div class="col-3 offset-1">
+            <input type="time" id="date" name="time" required>
+          </div>
+        </div>
+
+        <label id="topPad">PercentPoll link:</label>
+        <input type="text" class="form-control input-monospace input-sm " id="link" value="https://percentpoll.herokuapp.com/vote/{{hostId}}/{{pollId}}" readonly>
+      </div>
+    </div>
+    <div class="col" style="display:flex">
+      <input type="submit" class="btn btn-primary btn-lg btn-block" onclick="copyLink()" id="create" value="Create & Copy link">
+    </div>
+
+    </form>
+
   </div>
+</div>
 {% endblock %}

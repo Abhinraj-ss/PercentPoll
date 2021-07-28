@@ -22,16 +22,17 @@ def login():
         remember = True if request.form.get('remember') else False
         user = User.query.filter_by(username=username).first()
         today = datetime.datetime.now() 
-        polls = Poll.query.filter_by( hostId=user.id, closed=False).all()
-        for poll in polls:
-            if poll.date<=today:
-                poll.closed=True
+        print(user)
+        
         next=request.form.get('next')
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login',next=next))
         args=next.split('/',4) 
-        
+        polls = Poll.query.filter_by( hostId=user.id, closed=False).all()
+        for poll in polls:
+            if poll.date<=today:
+                poll.closed=True
         if next != "/" and next !='' and args[1] == "vote" :
             if int(args[2])!=user.id:
                 login_user(user, remember=remember)

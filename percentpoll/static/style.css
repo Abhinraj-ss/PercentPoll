@@ -35,8 +35,10 @@ h3 {
     height: 50px;
     }
 .wrap{
+    justify-content: center;
+	align-items: center;
     color:white;
-    font-size:5em;
+    font-size:5vw;
     font-family: 'Montserrat', sans-serif;
     }
 #me{

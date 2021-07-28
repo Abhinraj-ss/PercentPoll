@@ -16,41 +16,48 @@
 
 <body id="body">
 
-  <nav class="navbar navbar-expand-custom navbar-mainbg">
-    <a class="navbar-brand navbar-logo" href="/"><img src="{{url_for('static', filename='logo.png')}}" /></a>
-    <h1 class="my-0 mr-md-auto font-weight-bold">PercentPoll</h1>
-    <ul class="navbar-nav ml-auto">
-      {% if current_user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('main.index') }}" id="nav">HOME</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('main.current') }}" id="nav">CURRENT POLLS
-          <span class="badge badge-light">{% block current %}{% endblock %}</span>
-          <span class="sr-only">unread messages</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('main.view') }}" id="nav">CLOSED POLLS
-          <span class="badge badge-light">{% block closed %}{% endblock %}</span>
-          <span class="sr-only">unread messages</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('auth.logout') }}" id="nav">LOG OUT</a>
-      </li>
-      {% endif %}
-      {% if not current_user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('auth.login') }}" id="nav">LOG IN</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('auth.register') }}" id="nav">REGISTER</a>
-      </li>
-      {% endif %}
-    </ul>
-      
-  </nav>
+    <header class="header">
+        <nav class="navbar">
+            <a class="navbar-logo" href="/"><img src="{{url_for('static', filename='logo.png')}}" /></a>
+            <h1 class="my-0 mr-md-auto font-weight-bold">PercentPoll</h1>
+            <ul class="nav-menu">
+                {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.index') }}" id="nav">HOME</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.current') }}" id="nav">CURRENT POLLS
+                      <span class="badge badge-light">{% block current %}{% endblock %}</span>
+                      <span class="sr-only">unread messages</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('main.view') }}" id="nav">CLOSED POLLS
+                      <span class="badge badge-light">{% block closed %}{% endblock %}</span>
+                      <span class="sr-only">unread messages</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}" id="nav">LOG OUT</a>
+                  </li>
+                  {% endif %}
+                  {% if not current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}" id="nav">LOG IN</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.register') }}" id="nav">REGISTER</a>
+                  </li>
+                  {% endif %}
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+</header
+
 
   <div class="container-fluid">
     {% block body %}{% endblock %}

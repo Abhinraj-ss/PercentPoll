@@ -190,5 +190,5 @@ def current():
 def invalidPoll():
     current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
     closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-    render_template("error.html",,current_count=current_count,closed_count=closed_count)
+    render_template("error.html",current_count=current_count,closed_count=closed_count)
 

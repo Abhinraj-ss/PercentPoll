@@ -284,6 +284,7 @@ a {
     .nav-menu {
         position: fixed;
         left: -100%;
+        z-index: 1;
         top: 5rem;
         flex-direction: column;
         background-color: #9c27b0;

@@ -30,7 +30,7 @@ footer {
 h2 {
    font-weight:bold;
    color:#9c27b0;
-   font-size:50px;
+   font-size:220%;
    font-family: 'Titillium Web', sans-serif;
    margin-top: 0.5em;
   }
@@ -65,7 +65,7 @@ h3 {
 	width:70%;
 	font-size:40;
 	background-color: #0063B1;
-	border:2px solid white;
+	border:0.1rem  solid white;
 	}
 #view{
 	background-color: #0063B1;
@@ -77,10 +77,10 @@ h3 {
 	}
 #date{
     display: flex;
-    height: 50px;
+    height: 3rem;
     width: 100%;
-    border-radius:27px;
-    padding: 12px 20px;
+    border-radius:2rem;
+    padding: 0.5rem 1rem;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #9c27b0;

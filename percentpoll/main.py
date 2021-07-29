@@ -23,6 +23,7 @@ def index():
 
 
 @main.route("/create", methods=["GET","POST"])
+@login_required
 def create():
     if request.method == 'GET':
     
@@ -150,6 +151,7 @@ def vote(hostId,pollId):
     
     
 @main.route("/view")
+@login_required
 def view():
     today = datetime.datetime.now() 
     date_today = today.strftime("%d/%m/%Y")
@@ -168,6 +170,7 @@ def view():
     return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current,current_count=current_count,closed_count=closed_count)
 	    
 @main.route("/current")
+@login_required
 def current():
     today = datetime.datetime.now() 
     date_today = today.strftime("%d/%m/%Y")
@@ -187,6 +190,7 @@ def current():
     
     
 @main.route("/invalidPoll")
+@login_required
 def invalidPoll():
     current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
     closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())

@@ -137,7 +137,7 @@ body{
 	font-family: 'Roboto', sans-serif;
 	background-image: url('../static/bg.jpg');
 	width:100vw;
-    height:100vh;
+    height:auto;
 	background-repeat: no-repeat;
 	background-size:cover;
 }

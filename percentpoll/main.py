@@ -25,6 +25,7 @@ def index():
 @main.route("/create", methods=["GET","POST"])
 @login_required
 def create():
+	lastPoll = 0
     if request.method == 'GET':
     
         current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
@@ -43,7 +44,6 @@ def create():
         time=request.form['time']
         closing=date+" "+time
         closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d %H:%M')
-	lastPoll = Poll.query.order_by(Poll.id.desc()).first()
         for i in range(len(pollOption),10):
             pollOption.append('NONE')
                 

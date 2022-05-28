@@ -25,7 +25,7 @@ def index():
 @main.route("/create", methods=["GET","POST"])
 @login_required
 def create():
-	lastPoll = 0
+    lastPoll = 0
     if request.method == 'GET':
     
         current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())

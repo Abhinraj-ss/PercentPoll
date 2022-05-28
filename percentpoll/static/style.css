@@ -134,6 +134,7 @@ body{
 	background-image: url('../static/bg.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
+    scroll-behavior: smooth;
 }
 
 
@@ -363,68 +364,6 @@ a {
 	 transition: ease-in-out 0.5s;
 }
 
-
-
-
-/*bouncing balls
-
-section.wrapper{
-	display:flex;
-	}
-
-div.flex{
-	display:flex;	
-	flex-direction:row;
-	flex-wrap:wrap;
-	align-items:center;
-	margin:0 auto;
-}
-
-.flex > span{
-	width:20px;
-	height:20px;
-	margin:10px 10px;
-	background-color:#fff;
-	animation: bounce 5s ease-in-out infinite;
-}
-
-@keyframes bounce{
-0%,
-50%,
-100%{
-	transform:scaleY(1);
-	border-radius:50%;
-	}
-25%,
-75%{
-	transform:translateY(-100px) rotateY(360deg) scaleX(.66) scaleY(1.25);
-	border-radius:50%;
-	}
-15%,
-40%,
-65%,
-90%{
-	transform: translateY(10px) scaleX(1.25) scaleY(.5);
-	border-bottom-left-radius:25%;
-	border-bottom-right-radius:25%;
-	}
-}
-
-.flex > span.circle-2{
-	animation-delay: .2s;
-}
-.flex > span.circle-3{
-	animation-delay: .4s;
-}
-.flex > span.circle-4{
-	animation-delay: .6s;
-}
-.flex > span.circle-5{
-	animation-delay: .8s;
-}
-
-
-*/
 
 
 

@@ -15,9 +15,9 @@ def index():
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
-    
-    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    with db.session.no_autoflush:
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
     return render_template("index.html", user=current_user.name.title(),current_count=current_count,closed_count=closed_count)
 
 
@@ -154,19 +154,20 @@ def vote(hostId,pollId):
 @login_required
 def view():
     today = datetime.datetime.now() 
-    date_today = today.strftime("%d/%m/%Y")
+    #date_today = today.strftime("%d/%m/%Y")
     polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
-    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-    polls = Poll.query.filter_by( hostId=current_user.id, closed=True).all()
-    percents=[]
-    
-    for poll in polls:
-        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
-    current=zip(polls,percents)
+    with db.session.no_autoflush:
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+        polls = Poll.query.filter_by( hostId=current_user.id, closed=True).all()
+        percents=[]
+        
+        for poll in polls:
+            percents.append(Percentpoll.query.filter_by( id=poll.id).first())
+        current=zip(polls,percents)
     return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current,current_count=current_count,closed_count=closed_count)
 	    
 @main.route("/current")
@@ -178,14 +179,15 @@ def current():
     for poll in polls:
         if poll.date<=today:
             poll.closed=True
-    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
-    percents=[]
-    
-    for poll in polls:
-        percents.append(Percentpoll.query.filter_by( id=poll.id).first())
-    current=zip(polls,percents)
+    with db.session.no_autoflush:
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+        polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+        percents=[]
+        
+        for poll in polls:
+            percents.append(Percentpoll.query.filter_by( id=poll.id).first())
+        current=zip(polls,percents)
     return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current,current_count=current_count,closed_count=closed_count)
     
     

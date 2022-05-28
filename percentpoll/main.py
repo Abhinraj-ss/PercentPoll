@@ -54,9 +54,7 @@ def create():
         
         new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         db.session.add(new_percentpoll)
-	db.session.commit() 
         db.session.add(new_poll)
-	db.session.commit() 
         db.session.add(new_pollings)
         db.session.commit()
         return redirect(url_for('main.index'))

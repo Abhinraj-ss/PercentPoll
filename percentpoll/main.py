@@ -170,7 +170,6 @@ def view():
         for poll in polls:
             percents.append(Percentpoll.query.filter_by( id=poll.id).first())
         current=zip(polls,percents)
-	db.session.commit() 
     return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current,current_count=current_count,closed_count=closed_count)
 	    
 @main.route("/current")
@@ -191,7 +190,6 @@ def current():
         for poll in polls:
             percents.append(Percentpoll.query.filter_by( id=poll.id).first())
         current=zip(polls,percents)
-	db.session.commit() 
     return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current,current_count=current_count,closed_count=closed_count)
     
     
@@ -201,6 +199,5 @@ def invalidPoll():
     with db.session.no_autoflush:
 	    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
 	    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-	db.session.commit() 
     render_template("error.html",current_count=current_count,closed_count=closed_count)
 

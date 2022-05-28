@@ -23,8 +23,9 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        
-        return User.query.get(int(user_id))
+        with db.session.no_autoflush:
+            userId=User.query.get(int(user_id))
+        return userId
 
     
     from .auth import auth as auth_blueprint

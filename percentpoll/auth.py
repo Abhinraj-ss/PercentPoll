@@ -45,6 +45,7 @@ def login():
     with db.session.no_autoflush:
         current_count = len(Poll.query.filter_by( hostId=user.id, closed=False).all())
         closed_count = len(Poll.query.filter_by( hostId=user.id, closed=True).all())
+    db.session.commit() 
     return render_template("index.html",first=True, user=user.name.title(),current_count=current_count,closed_count=closed_count)
     
 @auth.route('/logout')

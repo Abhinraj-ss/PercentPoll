@@ -33,7 +33,6 @@ def create():
         closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         polls=Poll.query.filter_by(hostId=current_user.id).all()
         lastPoll = Poll.query.order_by(Poll.id.desc()).first()
-	db.session.commit() 
         if polls:
             return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1,current_count=current_count,closed_count=closed_count)
         return render_template("create.html",hostId=current_user.id,pollId=1,current_count=current_count,closed_count=closed_count)

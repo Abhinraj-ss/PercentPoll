@@ -43,12 +43,13 @@ def create():
         time=request.form['time']
         closing=date+" "+time
         closing_date=datetime.datetime.strptime(closing, '%Y-%m-%d %H:%M')
+	lastPoll = Poll.query.order_by(Poll.id.desc()).first()
         for i in range(len(pollOption),10):
             pollOption.append('NONE')
                 
         new_poll = Poll(hostId=current_user.id, title=title,option1=pollOption[0],option2=pollOption[1],option3=pollOption[2],option4=pollOption[3],option5=pollOption[4],option6=pollOption[5],option7=pollOption[6],option8=pollOption[7],option9=pollOption[8],option10=pollOption[9],date=closing_date,closed=False)
   
-        new_pollings=Pollings(pollId=new_poll.id,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
+        new_pollings=Pollings(pollId=lastPoll+1,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         
         new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         db.session.add(new_percentpoll)

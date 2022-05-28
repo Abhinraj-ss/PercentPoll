@@ -114,6 +114,7 @@ h4{
 	align-items: center;
 	color:white;
 	border-radius:15px;
+    background-blend-mode: luminosity;
 	background-color:#9c27b0 ;
 	}
 #alert{

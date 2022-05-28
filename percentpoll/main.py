@@ -26,13 +26,13 @@ def index():
 @login_required
 def create():
     if request.method == 'GET':
-    
-        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-        polls=Poll.query.filter_by(hostId=current_user.id).all()
-        lastPoll = Poll.query.order_by(Poll.id.desc()).first()
-        if polls:
-            return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1,current_count=current_count,closed_count=closed_count)
+        with db.session.no_autoflush:
+            current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+            closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+            polls=Poll.query.filter_by(hostId=current_user.id).all()
+            lastPoll = Poll.query.order_by(Poll.id.desc()).first()
+            if polls:
+                return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1,current_count=current_count,closed_count=closed_count)
         return render_template("create.html",hostId=current_user.id,pollId=1,current_count=current_count,closed_count=closed_count)
     
     if request.method == 'POST':
@@ -81,69 +81,71 @@ def vote(hostId,pollId):
     
     if request.method == 'GET':
         today = datetime.datetime.now()
-        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-        if poll!=None:
-            if poll.date<=today:
-                poll.closed=True
-                message="Requested Poll has been closed."
-                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
-            elif current_user.id in voters:
-                message="Your have already responded."
-                return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
-            
-            return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,current_count=current_count,closed_count=closed_count)
+        with db.session.no_autoflush:
+            current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+            closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+            if poll!=None:
+                if poll.date<=today:
+                    poll.closed=True
+                    message="Requested Poll has been closed."
+                    return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
+                elif current_user.id in voters:
+                    message="Your have already responded."
+                    return render_template('index.html',message=message,first=True, user=current_user.username.title(),borderColor="red",current_count=current_count,closed_count=closed_count)
+                
+                return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,current_count=current_count,closed_count=closed_count)
         return render_template('error.html',first=True,current_count=current_count,closed_count=closed_count)
     
     if request.method == 'POST':
-        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
-        select = request.form['selected']
-        if select=="Select":
-            message="Please select any of the option given !!!"
-            return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message,current_count=current_count,closed_count=closed_count)
-        index=pollOption.index(select)
-        option=f"option{index+1}"
-        polling = Pollings.query.filter_by( id = poll.id).first()
-        percentpoll = Percentpoll.query.filter_by( id = poll.id).first()
-        sum=polling.option1+polling.option2+polling.option3+polling.option4+polling.option5+polling.option6+polling.option7+polling.option8+polling.option9+polling.option10+1
-        
-        if option=="option1":
-            polling.option1+=1
-        elif option=="option2":
-            polling.option2+=1
-        elif option=="option3":
-            polling.option3+=1
-        elif option=="option4":
-            polling.option4+=1
-        elif option=="option5":
-            polling.option5+=1
-        elif option=="option6":
-            polling.option6+=1
-        elif option=="option7":
-            polling.option7+=1
-        elif option=="option8":
-            polling.option8+=1
-        elif option=="option9":
-            polling.option9+=1
-        elif option=="option10":
-            polling.option10+=1
+        with db.session.no_autoflush:
+            current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+            closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+            select = request.form['selected']
+            if select=="Select":
+                message="Please select any of the option given !!!"
+                return render_template("vote.html",hostId=hostId,pollId=poll.id,title=poll.title,pollOption=pollOption,message=message,current_count=current_count,closed_count=closed_count)
+            index=pollOption.index(select)
+            option=f"option{index+1}"
+            polling = Pollings.query.filter_by( id = poll.id).first()
+            percentpoll = Percentpoll.query.filter_by( id = poll.id).first()
+            sum=polling.option1+polling.option2+polling.option3+polling.option4+polling.option5+polling.option6+polling.option7+polling.option8+polling.option9+polling.option10+1
             
-        polling.voters+=(';'+str(current_user.id))
-        
-        percentpoll.option1=(polling.option1/sum)*100
-        percentpoll.option2=(polling.option2/sum)*100   
-        percentpoll.option3=(polling.option3/sum)*100    
-        percentpoll.option4=(polling.option4/sum)*100
-        percentpoll.option5=(polling.option5/sum)*100
-        percentpoll.option6=(polling.option6/sum)*100
-        percentpoll.option7=(polling.option7/sum)*100
-        percentpoll.option8=(polling.option8/sum)*100
-        percentpoll.option9=(polling.option9/sum)*100
-        percentpoll.option10=(polling.option10/sum)*100
-        
-        db.session.commit()   
-        message="Your response has been recorded."
+            if option=="option1":
+                polling.option1+=1
+            elif option=="option2":
+                polling.option2+=1
+            elif option=="option3":
+                polling.option3+=1
+            elif option=="option4":
+                polling.option4+=1
+            elif option=="option5":
+                polling.option5+=1
+            elif option=="option6":
+                polling.option6+=1
+            elif option=="option7":
+                polling.option7+=1
+            elif option=="option8":
+                polling.option8+=1
+            elif option=="option9":
+                polling.option9+=1
+            elif option=="option10":
+                polling.option10+=1
+                
+            polling.voters+=(';'+str(current_user.id))
+            
+            percentpoll.option1=(polling.option1/sum)*100
+            percentpoll.option2=(polling.option2/sum)*100   
+            percentpoll.option3=(polling.option3/sum)*100    
+            percentpoll.option4=(polling.option4/sum)*100
+            percentpoll.option5=(polling.option5/sum)*100
+            percentpoll.option6=(polling.option6/sum)*100
+            percentpoll.option7=(polling.option7/sum)*100
+            percentpoll.option8=(polling.option8/sum)*100
+            percentpoll.option9=(polling.option9/sum)*100
+            percentpoll.option10=(polling.option10/sum)*100
+            
+            db.session.commit()   
+            message="Your response has been recorded."
         return render_template("index.html", message=message ,first=True, user=current_user.username.title(),borderColor="#28A828",current_count=current_count,closed_count=closed_count)
    
 
@@ -155,11 +157,12 @@ def vote(hostId,pollId):
 def view():
     today = datetime.datetime.now() 
     #date_today = today.strftime("%d/%m/%Y")
-    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
-    for poll in polls:
-        if poll.date<=today:
-            poll.closed=True
     with db.session.no_autoflush:
+        polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+        for poll in polls:
+            if poll.date<=today:
+                poll.closed=True
+        
         current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
         closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         polls = Poll.query.filter_by( hostId=current_user.id, closed=True).all()
@@ -175,11 +178,12 @@ def view():
 def current():
     today = datetime.datetime.now() 
     date_today = today.strftime("%d/%m/%Y")
-    polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
-    for poll in polls:
-        if poll.date<=today:
-            poll.closed=True
     with db.session.no_autoflush:
+        polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
+        for poll in polls:
+            if poll.date<=today:
+                poll.closed=True
+        
         current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
         closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         polls = Poll.query.filter_by( hostId=current_user.id, closed=False).all()
@@ -194,7 +198,8 @@ def current():
 @main.route("/invalidPoll")
 @login_required
 def invalidPoll():
-    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    with db.session.no_autoflush:
+        current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
     render_template("error.html",current_count=current_count,closed_count=closed_count)
 

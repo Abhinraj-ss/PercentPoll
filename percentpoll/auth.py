@@ -42,8 +42,9 @@ def login():
             login_user(user, remember=remember)
             return redirect(url_for('main.vote',hostId=int(args[0]),pollId=int(args[1])))
     login_user(user, remember=remember)
-    current_count = len(Poll.query.filter_by( hostId=user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=user.id, closed=True).all())
+    with db.session.no_autoflush:
+        current_count = len(Poll.query.filter_by( hostId=user.id, closed=False).all())
+        closed_count = len(Poll.query.filter_by( hostId=user.id, closed=True).all())
     return render_template("index.html",first=True, user=user.name.title(),current_count=current_count,closed_count=closed_count)
     
 @auth.route('/logout')

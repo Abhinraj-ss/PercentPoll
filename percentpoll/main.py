@@ -18,6 +18,7 @@ def index():
     with db.session.no_autoflush:
         current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
         closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    db.session.commit() 
     return render_template("index.html", user=current_user.name.title(),current_count=current_count,closed_count=closed_count)
 
 
@@ -32,6 +33,7 @@ def create():
         closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
         polls=Poll.query.filter_by(hostId=current_user.id).all()
         lastPoll = Poll.query.order_by(Poll.id.desc()).first()
+	db.session.commit() 
         if polls:
             return render_template("create.html",hostId=current_user.id,pollId=lastPoll.id+1,current_count=current_count,closed_count=closed_count)
         return render_template("create.html",hostId=current_user.id,pollId=1,current_count=current_count,closed_count=closed_count)
@@ -53,7 +55,9 @@ def create():
         
         new_percentpoll=Percentpoll(pollId=new_poll.hostId,option1=0,option2=0,option3=0,option4=0,option5=0,option6=0,option7=0,option8=0,option9=0,option10=0)
         db.session.add(new_percentpoll)
+	db.session.commit() 
         db.session.add(new_poll)
+	db.session.commit() 
         db.session.add(new_pollings)
         db.session.commit()
         return redirect(url_for('main.index'))
@@ -169,6 +173,7 @@ def view():
         for poll in polls:
             percents.append(Percentpoll.query.filter_by( id=poll.id).first())
         current=zip(polls,percents)
+	db.session.commit() 
     return render_template("view.html",page="CLOSED POLLS",polls=len(polls), current_polls=current,current_count=current_count,closed_count=closed_count)
 	    
 @main.route("/current")
@@ -189,13 +194,16 @@ def current():
         for poll in polls:
             percents.append(Percentpoll.query.filter_by( id=poll.id).first())
         current=zip(polls,percents)
+	db.session.commit() 
     return render_template("view.html",page="CURRENT POLLLS",polls=len(polls),current_polls=current,current_count=current_count,closed_count=closed_count)
     
     
 @main.route("/invalidPoll")
 @login_required
 def invalidPoll():
-    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
-    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+    with db.session.no_autoflush:
+	    current_count = len(Poll.query.filter_by( hostId=current_user.id, closed=False).all())
+	    closed_count = len(Poll.query.filter_by( hostId=current_user.id, closed=True).all())
+	db.session.commit() 
     render_template("error.html",current_count=current_count,closed_count=closed_count)
 
